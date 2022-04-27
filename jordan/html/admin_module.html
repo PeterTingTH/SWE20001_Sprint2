@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Online Catering System">
+        <meta name="keywords" content="HTML">
+        <meta name="author" content="Jordan Seow">
+        <title>Admin Module</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <header><h1>Admin Module</h1></header>
+
+        <aside>
+            <ul>
+                <li><a class = sidebar_a href="admin_module.html">Admin Module</a></li>
+                <li><a class = sidebar_a  href="#daily_sales">Daily Sales</a></li>
+                <li><a class = sidebar_a  href="#customer_orders">Customer Orders</a></li>
+            </ul>
+        </aside>
+        
+        <form>
+            <div class = "order">
+                
+                <div class = "order_box">
+                    <img class = "order_image" src="images/total.jpg" alt="Total Orders">
+                    <p class = "order_text"><a class = order_a  href="total_orders.html">Total Orders</a></p>
+                </div>
+
+                <div class = "order_box">
+                    <img class = "order_image" src="images/pending.jpg" alt="Pending Orders">
+                    <p class = "order_text"><a class = order_a  href="pending_orders.html"></a>Pending Orders</p>
+                </div>
+
+                <div class = "order_box">
+                    <img class = "order_image" src="images/completed.jpg" alt="Completed Orders">
+                    <p class = "order_text"><a class = order_a  href="completed_orders.html"></a>Completed Orders</p>
+                </div>
+
+                <div class = "order_box">
+                    <img class = "order_image" src="images/cancelled.png" alt="Cancelled Orders">
+                    <p class = "order_text"><a class = order_a  href="cancelled_orders.html"></a>Cancelled Orders</p>
+                </div>
+
+            </div>
+        
+
+            <div class = "sales_box">
+                <h2 id="daily_sales">Daily Sales</h2>
+                <img id="sales_image" src="images/daily_sales.png" alt="Total Sales">
+            </div>
+
+            <div class = "customer_box">
+                <h2 id="customer_orders">Customer Orders</h2>
+                <div class = "section_details">
+                    <div class = "customer_details">
+                        <p class = primary_details>Customer ID</p>
+                        <p>101223358</p>
+                    </div>
+                    <div class = "customer_details">
+                        <p class = primary_details>Name</p>
+                        <p>Jordan Seow</p>
+                    </div>
+                    <div class = "customer_details">
+                        <p class = primary_details>Address</p>
+                        <p>Q5B, 93350 Kuching, Sarawak</p>
+                    </div>
+                    <div class = "customer_details">
+                        <p class = primary_details>Payment Type</p>
+                        <p>Debit Card</p>
+                    </div>
+                    <div class = "customer_details">
+                        <p class = primary_details>Date</p>
+                        <p>4/7/2022</p>
+                    </div>
+                    <div class = "customer_details">
+                        <p class = primary_details>Total</p>
+                        <p>RM100.78</p>
+                    </div>
+                </div>
+
+                <table>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Order</th>
+                      <th>Delivery</th>
+                    </tr>
+                    <tr>
+                      <td>101223358</td>
+                      <td>Jordan Seow</td>
+                      <td>1</td>
+                      <td>Self Pick Up</td>
+                    </tr>
+                    <tr>
+                        <td>101223359</td>
+                        <td>Chin Tu Fat</td>
+                        <td>1</td>
+                        <td>Truck</td>
+                    </tr>
+                    <tr>
+                        <td>101223359</td>
+                        <td>Sum Ting Wong</td>
+                        <td>1</td>
+                        <td>Truck</td>
+                    </tr>
+                    <tr>
+                        <td>101223360</td>
+                        <td>Lei Ying Low</td>
+                        <td>1</td>
+                        <td>Truck</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
+    </body>
+
+</html>
