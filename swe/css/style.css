@@ -1,0 +1,267 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html{
+	scroll-behavior: smooth;
+}
+
+/*Body*/
+body{
+    background-color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+/*Navigation Settings*/
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #333;
+}
+
+.logo{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.logo a{
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    position: relative;
+}
+
+.nav-links a{
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.nav-links a:hover{
+    background-color: #111;
+}
+
+#sign_up_page .position_signup, #login_page .position_login{
+    background-color: #111;
+}
+
+/*Sign Up, Login, Verification Key, Forget Password*/
+.form_body {
+	background: #f6f5f7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	height: 92vh;
+}
+
+.container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 700px;
+	max-width: 100%;
+	min-height: 550px;
+}
+
+.form-container button {
+	border-radius: 20px;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+    margin: 8px;
+}
+
+.form-container button:active {
+	transform: scale(0.95);
+}
+
+.form-container button:focus {
+	outline: none;
+}
+
+.form-container form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+.form-container input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+.error_section{
+	border:1px solid red !important;
+}
+
+.form-container h2 {
+    margin: 8px;
+}
+
+.error_msg{
+	font-size: 13px;
+}
+
+.forget_pass{
+	text-decoration: underline;
+	color: #000000;
+	font-size: 13px;
+	margin-bottom: 8px;
+}
+
+.overlay-panel {
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+    color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	top: 0;
+}
+
+.overlay-container h1 {
+	font-weight: bold;
+}
+
+.overlay-container p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px;
+}
+
+.switch_login_signup{
+    padding: 10px 20px;
+	background-color: transparent;
+    border: 2px solid #FFF;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+#sign_up_page .form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+    left: 50%;
+	width: 50%;
+}
+
+#sign_up_page .overlay-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#sign_up_page .overlay-panel, #sign_up_page .form-container button{
+	background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
+}
+
+#login_page .form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+    left: 0;
+	width: 50%;
+}
+
+#login_page .overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#login_page .overlay-panel, #login_page .form-container button{
+	background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
+}
+
+.one_column_form .container{
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 450px;
+	max-width: 100%;
+	min-height: 500px;
+}
+
+.one_column_form .form-container{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.one_column_form .form-container h2, .one_column_form .form-container input, .one_column_form .form-container button{
+	margin: 10px;
+}
+
+.one_column_form .form-container button{
+	background-color: #333;
+}
+/*Profile*/
+.profile_background{
+	background-color: #000000;
+	width:100%;
+	height: 150px;
+
+}
+
+.profile_information{
+	width: 550px;
+	text-align: center;
+	border: 2px solid red;
+	margin:auto;
+	margin-top: -50px;
+}
+
+.profile_pic{
+	border-radius: 500px;
+	width: 100px;
+}
+
