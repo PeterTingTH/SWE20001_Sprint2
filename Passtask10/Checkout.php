@@ -54,7 +54,7 @@
 
      $conn = @mysqli_connect($servername, $username, $password);
 
-     $sql = "CREATE DATABASE chekoutpagedb";
+     $sql = "CREATE DATABASE IF NOT EXISTS chekoutpagedb";
 
      mysqli_query($conn, $sql);
      mysqli_close($conn)
@@ -70,7 +70,7 @@
 
         $conn = @mysqli_connect($servername, $username, $password, $dbname);
 
-        $sql = "CREATE TABLE checkoutlisting(
+        $sql = "CREATE TABLE IF NOT EXISTS checkoutlisting(
             id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			address VARCHAR(255) NOT NULL,
             phonenum INT(11) NOT NULL,
@@ -183,25 +183,12 @@ Remark: -
 <div class="option">
 <label for="Delivery Time">Delivery Time</label>
 <hr></hr>
-    <p>Options: 
-        <select name="time" id="time">
-        <option value=""></option>
-        <option value="8am">8 am</option>
-        <option value="9am">9 am</option>
-        <option value="10am">10 am</option>
-        <option value="11am">11 am</option>
-        <option value="12pm">12 pm</option>
-        <option value="1pm">1 pm</option>
-        <option value="2pm">2 pm</option>
-        <option value="3pm">3 pm</option>
-        <option value="4pm">4 pm</option>
-        <option value="5pm">5 pm</option>
-        <option value="6pm">6 pm</option>
-        </select>
-     </p>
-</div>
-</div>
+<?php include('../Leonard/calculatetime(norange).php')
 
+?>
+</div>
+</div>
+<br>
 <div class="container1">
     <p>Message:
     <br><br>
