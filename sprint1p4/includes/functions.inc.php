@@ -241,7 +241,7 @@ function adminExist($conn, $input, $type){
 }
 
 // Create data into database
-function createCustomer($conn, $name, $phone, $email, $pwd, $vkey){
+function createCustomer($conn, $name, $email, $phone, $pwd, $vkey){
     $sql = "INSERT INTO custdata (custName, custEmail, custPhone, custPassword, vKey) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -403,13 +403,13 @@ function resendVKey($conn, $email){
 }
 
 // Remove keys
-function removePassResetKey($conn,$emailRequest){
-    $query = "DELETE FROM passwordreset where passResetEmail = '$emailRequest';";
+function removePassResetKey($conn,$idRequest){
+    $query = "DELETE FROM passwordreset where passResetCustID = '$idRequest';";
     $result = mysqli_query($conn,$query);
 }
 
-function removeDeleteAccKey($conn,$emailRequest){
-    $query = "DELETE FROM deleteacc where deleteAccEmail = '$emailRequest';";
+function removeDeleteAccKey($conn,$idRequest){
+    $query = "DELETE FROM deleteacc where deleteAccCustID = '$idRequest';";
     $result = mysqli_query($conn,$query);
 }
 
@@ -417,21 +417,22 @@ function removeDeleteAccKey($conn,$emailRequest){
 function sendResetPassword($conn, $email){
     $custExist = custExist($conn, $email, "email");
     $custVerified = $custExist["verified"];
+    $idRequest = $custExist["custID"];
 
     if ($custVerified == 1){
-        removePassResetKey($conn,$email); 
+        removePassResetKey($conn,$idRequest); 
 
         $passResetKey = hash('sha256',time().$email);
         $linkExpire = date("U") + 1800; 
         
-        $sql = "INSERT INTO passwordreset (passResetEmail, passResetKey, passResetExpires) VALUES (?, ?, ?);";
+        $sql = "INSERT INTO passwordreset (passResetCustID, passResetKey, passResetExpires) VALUES (?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)){
             header("location: ../forgetPass.php?error=stmtfailed");
             exit();
         }
     
-        mysqli_stmt_bind_param($stmt, "sss", $email, $passResetKey, $linkExpire);
+        mysqli_stmt_bind_param($stmt, "sss", $idRequest, $passResetKey, $linkExpire);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
@@ -447,17 +448,19 @@ function sendResetPassword($conn, $email){
 
 function sendDeleteAcc($conn, $email){
     $custExist = custExist($conn, $email, "email");
+    $idRequest = $custExist["custID"];
+
     removeDeleteAccKey($conn,$email); 
     $deleteAccKey = hash('sha256',time().$email);
     $linkExpire = date("U") + 600; 
     
-    $sql = "INSERT INTO deleteacc (deleteAccEmail, deleteAccKey, deleteAccExpires) VALUES (?, ?, ?);";
+    $sql = "INSERT INTO deleteacc (deleteAccCustID, deleteAccKey, deleteAccExpires) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         header("location: ../deleteAccConfirmation.php?error=stmtfailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "sss", $email, $deleteAccKey, $linkExpire);
+    mysqli_stmt_bind_param($stmt, "sss", $idRequest, $deleteAccKey, $linkExpire);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     sendDeleteKey($email,$deleteAccKey);
@@ -468,10 +471,10 @@ function sendDeleteAcc($conn, $email){
 // Reset password
 function resetPassword($conn,$newPwd,$passResetKey){
     $requestExist = passResetKeyExist($conn, $passResetKey);
-    $emailRequest = $requestExist["passResetEmail"];
-    $query = "UPDATE custdata SET custPassword = '$newPwd' WHERE custEmail = '$emailRequest';";
+    $idRequest = $requestExist["passResetCustID"];
+    $query = "UPDATE custdata SET custPassword = '$newPwd' WHERE custID = '$idRequest';";
     $result = mysqli_query($conn,$query);
-    removePassResetKey($conn,$emailRequest);
+    removePassResetKey($conn,$idRequest);
     header("location: ../forgetPass.php?error=reset");
     exit();
 }
@@ -483,16 +486,12 @@ function editAccount($conn,$editEmail,$editName,$editPhone,$editPwd){
 }
 
 // Delete cust acc
-function deleteCustAcc($conn,$emailRequest){
-    $custExist = custExist($conn,$emailRequest,"email");
-    $custID = $custExist['custID'];
-    removeCustProfilePic($custID);
+function deleteCustAcc($conn,$idRequest){
+    removeCustProfilePic($idRequest);
+    removePassResetKey($conn,$idRequest);
+    removeDeleteAccKey($conn,$idRequest);
 
-    $query = "DELETE FROM custdata where custEmail = '$emailRequest';";
-    $result = mysqli_query($conn,$query);
-    $query = "DELETE FROM passwordreset where passResetEmail = '$emailRequest';";
-    $result = mysqli_query($conn,$query);
-    $query = "DELETE FROM deleteacc where deleteAccEmail = '$emailRequest';";
+    $query = "DELETE FROM custdata where custID = '$idRequest';";
     $result = mysqli_query($conn,$query);
 }
 

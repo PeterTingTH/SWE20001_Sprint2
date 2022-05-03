@@ -47,7 +47,7 @@
 
             echo "<h1>$custName</h1>";
             if($custExist["custMembership"] == 0){
-                echo "<p>Normal user</p>";
+                echo "<p><a href=\"membership.php\" class=\"proceedMembershipPage\">Normal user</a></p>";
             } else {
                 echo "<p>Premium user</p>";
             }

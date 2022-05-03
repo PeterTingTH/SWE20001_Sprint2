@@ -114,7 +114,7 @@ if (isset($_POST["signup"])){
 
     if ($nameOK && $emailOK && $phoneOK && $pwdOK && $pwdRepeatOK){
         $vkey = hash('sha256',time().$email);
-        createCustomer($conn, $name, $phone, $email, $pwd, $vkey);
+        createCustomer($conn, $name, $email, $phone, $pwd, $vkey);
         sendVKey($email, $vkey);
         header("location: ../signup.php?error=none");
         exit();

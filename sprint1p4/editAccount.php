@@ -8,14 +8,6 @@
     <meta name="description" content="Edit Account" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>Edit Account</title>
-    <script>
-        function showSubmitPhotoForm(){
-            document.getElementById('profImgForm').style.display='block';
-        }
-        function hideSubmitPhotoForm(){
-            document.getElementById('profImgForm').style.display='none';
-        }
-    </script>
 </head>
 
 <body id="edit_acc">
@@ -150,10 +142,7 @@
         </div>
     </div>
 </body>
-<script>
-    if(document.getElementById('UpdateProfImg').checked == true){
-        document.getElementById('profImgForm').style.display='block';
-    }
-</script>
+
+<script src="js/editAcc.js"></script>
 
 </html>

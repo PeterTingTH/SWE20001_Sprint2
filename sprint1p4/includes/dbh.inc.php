@@ -59,7 +59,7 @@ function createTableUsers($conn){
 function createTablePasswordReset($conn){
     $sql = "CREATE TABLE IF NOT EXISTS passwordreset (
         passResetID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-        passResetEmail VARCHAR(128) NOT NULL,
+        passResetCustID INT(11) NOT NULL,
         passResetKey VARCHAR(64) NOT NULL,
         passResetExpires VARCHAR(128) NOT NULL
     )";
@@ -70,7 +70,7 @@ function createTablePasswordReset($conn){
 function createTableDeleteAcc($conn){
     $sql = "CREATE TABLE IF NOT EXISTS deleteacc (
         deleteAccID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-        deleteAccEmail VARCHAR(128) NOT NULL,
+        deleteAccCustID INT(11) NOT NULL,
         deleteAccKey VARCHAR(64) NOT NULL,
         deleteAccExpires VARCHAR(128) NOT NULL
     )";

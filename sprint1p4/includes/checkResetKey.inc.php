@@ -20,8 +20,8 @@ if (isset($_GET['passResetKey'])){
         } else {
             if (isset($_GET['delete'])){
                 $requestExist = passResetKeyExist($conn, $passResetKey);
-                $emailRequest = $requestExist["passResetEmail"];
-                removePassResetKey($conn,$emailRequest);
+                $idRequest = $requestExist["passResetCustID"];
+                removePassResetKey($conn,$idRequest);
                 header("location: ../forgetPass.php?error=cancelled");
                 exit();
             } else {

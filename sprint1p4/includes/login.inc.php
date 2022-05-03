@@ -14,7 +14,7 @@ if (isset($_POST["login"])){
     require_once 'functions.inc.php';
 
     if (isset($_SESSION['custid']) || isset($_SESSION['adminid'])){
-        header("location: loggedIn.php");
+        header("location: ../loggedIn.php");
         exit();
     }
 

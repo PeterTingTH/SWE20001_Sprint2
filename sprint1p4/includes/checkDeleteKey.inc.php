@@ -14,8 +14,6 @@ if (isset($_GET['deleteAccKey'])){
     }
 
     $loggedID = $_SESSION['custid'];
-    $currentCust = custExist($conn,$loggedID,"id");
-    $currentCustEmail = $currentCust['custEmail'];
 
     if (deleteAccKeyExist($conn, $deleteAccKey) == false){
         header("location: ../deleteAccConfirmation.php?error=invalid");
@@ -23,8 +21,8 @@ if (isset($_GET['deleteAccKey'])){
     } else {
         $deleteK = deleteAccKeyExist($conn, $deleteAccKey);
         $linkExpireT = $deleteK["deleteAccExpires"];
-        $emailRequest = $deleteK["deleteAccEmail"];
-        if($currentCustEmail != $emailRequest){
+        $idRequest = $deleteK["deleteAccCustID"];
+        if($loggedID != $idRequest){
             header("location: ../errorLoggedAcc.php");
             exit();
         } else {
@@ -33,11 +31,11 @@ if (isset($_GET['deleteAccKey'])){
                 exit();
             } else {
                 if (isset($_GET['delete'])){
-                    removeDeleteAccKey($conn,$emailRequest);
+                    removeDeleteAccKey($conn,$idRequest);
                     header("location: ../deleteAccConfirmation.php?error=cancelled");
                     exit();
                 } else {
-                    deleteCustAcc($conn,$emailRequest);
+                    deleteCustAcc($conn,$idRequest);
                     header("location: ../successDeleteAcc.php");
                     exit();
                 }

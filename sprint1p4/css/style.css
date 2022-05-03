@@ -260,12 +260,14 @@ nav{
 .profile_background{
 	background-color: #000000;
 	width:100%;
-	height:150px;
-
+	height:200px;
+	background-image: url(../images/profileBackground.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .profile_information{
-	width: 550px;
+	width: 50%;
 	text-align: center;
 	margin:auto;
 	margin-top: -75px;
@@ -278,7 +280,7 @@ nav{
 }
 
 .custDataTable{
-	width: 500px;
+	width: 50%;
 	margin:auto;
 	padding: 10px;
 }
@@ -295,4 +297,132 @@ nav{
 	background-color: #333;
 	color: white;
 	border-radius: 25px;
+}
+
+.proceedMembershipPage{
+	text-decoration: none;
+	color: #2c3e50;
+}
+
+/* Membership Page */
+.membership_background{
+	width:100%;
+	height:300px;
+	background-image: url(../images/membershipBackground.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.membership_background_txt{
+	margin:auto;
+	width: 80%;
+	padding-top: 110px;
+}
+
+.membership_background_title{
+	padding-bottom: 10px;
+}
+
+.membership_background_description{
+	font-size: 18px;
+}
+
+.membership_information{
+	padding-top: 25px;
+	width: 80%;
+	margin:auto;
+}
+
+.membership_benefit{
+	padding-top: 20px;
+	width:60%;
+	height: 150px;
+}
+
+.membership_benefit_description{
+	width: 55%;
+	float: left;
+}
+
+.membership_benefit_description p{
+	font-size: 17px;
+}
+
+
+.membership_benefit_img{
+	float: right;
+	width: 150px;
+}
+
+.membership_benefit_img img{
+	width: 100%;
+}
+
+.apply_membership_button{
+	width: 50%;
+	text-align: center;
+	margin:auto;
+}
+
+.apply_membership_button a{
+	display: inline-block;
+	padding:12px 45px;
+	margin-bottom: 15px;
+	text-decoration: none;
+	background-color: #333;
+	color: white;
+	border-radius: 25px;
+	cursor: pointer;
+}
+
+.info_text{
+	text-align: center;
+	margin:30px;
+}
+
+#membership_plan_options{
+	width: 50%;
+	margin: auto;
+	padding: 5px;
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	display: none;
+}
+
+#membership_plan_options button{
+	border: none;
+	border-radius: 25px;
+	color: #FFFFFF;
+	padding: 12px 45px;
+	background-color: #333;
+	text-align: center;
+}
+
+.membership_plan_option{
+	padding: 30px;
+	margin: 15px;
+	border: 1px dotted black;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.membership_plan_option_title{
+	font-weight: bold;
+}
+
+.membership_plan_option_small{
+	font-size: 14px;
+}
+
+.membership_plan_subscribe{
+	width: 200px;
+	margin: auto;
+}
+
+.membership_plan_option input[type="radio"]{
+	display: none;
 }
