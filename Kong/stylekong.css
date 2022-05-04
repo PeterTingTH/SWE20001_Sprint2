@@ -71,3 +71,70 @@ h1{
    text-transform: uppercase;
    color: #000;  
 }
+
+h2{
+    font-size: medium;
+}
+
+.container2{
+    text-align: center;
+}
+
+img{
+    border-radius: 10%;
+    width: 20%;
+    height: auto;
+    margin-left: 25%;
+}
+
+h3{
+    font-style: normal;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.product{
+    display: flex;
+}
+
+.product_list{
+    display: flex;
+    margin-left: 2%;
+}
+
+.product_listing{
+    width: 300px;
+    height: 90%;
+    border: 1px solid grey;   
+    border-radius: 10%;
+    padding-left: 2%;
+    
+}
+
+.product_listing_menu{
+   display: flex;
+}
+
+h4{
+    margin-left: auto;
+    font-size: 16px; 
+    margin-top: 18px; 
+    padding-right: 2%;
+}
+
+.product_listing_menu1{
+    display: flex;
+ }
+
+.order{
+    display: flex;
+}
+
+.order_total{
+    width: auto;
+    height: auto;
+    border: 1px hidden grey;   
+    border-radius: 10%;
+    padding-left: 2%;
+    display: flex;
+}
