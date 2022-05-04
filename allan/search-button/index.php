@@ -10,8 +10,8 @@
         <div class="search-class">
             <form action="search.php" method="POST">
                 <img src="search.png" alt="search image">
-                <input type="text" name="search-input" id="search-input" class="search-input">
-                <button type="submit" name="submit-search" class="submit-search" >Search</button>
+                <input type="text" name="search-input" class="search-input">
+                <button type="submit" name="submit-search" class="submit-search">Search</button>
             </form>
         </div>
     </body>
