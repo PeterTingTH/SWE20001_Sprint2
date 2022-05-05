@@ -70,11 +70,10 @@
           $q = "SELECT `order_id`, `quantity`, `productId`, `productName`, `totalPrice`, `deliveryAddress`, `deliveryTime` FROM ordertable";
           $result = mysqli_query($db, $q);
           ?>
-          <h1 style="text-align: center;">Your Orders</h1><br><br>
+          <h1 style="text-align: center;">Pending Orders</h1><br><br>
           <table style="border-collapse: collapse; width: 100%; text-align: center; padding: 10px;
           ">
             <tr>
-              <th>Serial Number</th>
               <th>Order ID</th>
               <th>Quantity</th>
               <th>Product ID</th>
@@ -82,14 +81,13 @@
               <th>Total Price</th>
               <th>Delivery Address</th>
               <th>Delivery Time</th>
+              <th>Cancel Order</th>
             </tr>
           <?php
           if (mysqli_num_rows($result) > 0) {
-            $sn=1;
             while($data = mysqli_fetch_assoc($result)) {
           ?>
           <tr>
-            <td><?php echo $sn; ?> </td>
             <td><?php echo $data['order_id']; ?> </td>
             <td><?php echo $data['quantity']; ?> </td>
             <td><?php echo $data['productId']; ?> </td>
@@ -97,14 +95,20 @@
             <td><?php echo $data['totalPrice']; ?> </td>
             <td><?php echo $data['deliveryAddress']; ?> </td>
             <td><?php echo $data['deliveryTime']; ?> </td>
+            <td><?php echo "<div id='texttohide'><a href='cancelorder2.php?order_id=".$data['order_id']."'>Cancel</a></div>";?></td>
           <tr>
           <?php
-            $sn++;}} else { ?>
+            }} else { ?>
               <tr>
-              <td colspan="8">No data found</td>
+              <td colspan="8">No pending orders</td>
               </tr>
 
         <?php } ?>
+        <script type="text/javascript"> 
+          $(document).ready( function() {
+           $('#texttohide').delay(100).fadeOut();
+         });
+         </script>
         </table>
     </body>
 </html>

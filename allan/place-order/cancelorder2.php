@@ -35,28 +35,53 @@
         </div>
        </header>
        <?php
-            include 'connect.php';
+            $orderid = $_GET['order_id'];
+            date_default_timezone_set('Africa/Nairobi');
+            $date = strtotime(date('d-m-y h:i:s'));
+           // $time = strtotime($_GET['deliveryTime']);
+            //$difference = (abs($time-$date)/3600);
+/*
+            $currentTime = (new DateTime('01:00'))->modify('+1 day');
+            $startTime = new DateTime('22:00');
+            $endTime = (new DateTime('07:00'))->modify('+1 day');
 
-            $id=$_POST['number'];
+            if ($currentTime >= $startTime && $currentTime <= $endTime) {
+                // Do something
+            }*/
 
-            $q="SELECT COUNT(1) FROM ordertable WHERE order_id=$id";
-            $r=mysqli_query($con, $q);
-            $row=mysqli_fetch_row($r);
-
-            if($row[0] >= 1) {
-                mysqli_query($con, "DELETE FROM ordertable WHERE order_id=$id");
-                echo "Order ID Deleted<br>";
-            } else {
-                echo "Record doesn't exist<br>";
-            }
-
-            mysqli_close($con);
+            //if($difference < 1){
+                if(ctype_digit($orderid)){
+                    //connect to database
+                    require "connect.php";
+                    
+                    //create a variable to select data from order table
+                    $sql1 = "SELECT * from ordertable WHERE `order_id` = {$orderid}";
+    
+                    $res1 = mysqli_query($con, $sql1);
+    
+                    //fetch data as an associative array and delete by row using the order id in 'view.php'
+                    if($res1 !== false){
+                        $order = mysqli_fetch_assoc($res1);
+                        $sql2 = "DELETE FROM ordertable WHERE `order_id` = {$orderid}";
+                        $res2 = mysqli_query($con, $sql2);
+                        if(!$res2){
+                            die('Delete failed.'); // TO DO: better error handling
+                        }else{                        
+                            echo "<script> alert('Your order was cancelled successfully'); </script>";
+                            //echo $time;
+                        }
+                    }else{
+                        die('error selecting order.');
+                    }
+                }else{
+                    echo 'invalid order id';
+                    }
+           /* } else {
+                echo "Your time limit of 1 hour before delivery time has passed.<br><br>";
+                echo $difference;
+            }*/
 
         ?>
-        <a href="view.php">Back to viewing orders</a>
-        <!--<script>
-        window.open('http://localhost/OCS/order/view.php');
-        </script>-->
         <footer>
             <i><p>Copyright © Pinocone Online Catering System <br>All rights reserved.</p></i>
         </footer>

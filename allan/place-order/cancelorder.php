@@ -5,4 +5,12 @@
         ID: <input type="number" name="number" id="number">
         <input type="submit" value="submit">
     </form>
+    <?php /*date_default_timezone_set('Africa/Nairobi');
+    $date = date('d-m-y h:i:s');
+
+    $time = strtotime('deliveryTime[0]');
+    echo "Time ordered: ".$time."<br><br>";
+    echo "Current time: ".$date; 
+    */
+    ?>
 </body>
