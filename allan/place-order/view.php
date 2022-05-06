@@ -7,33 +7,6 @@
       <title>Pinocone | View Order</title>
     </head>
     <body>
-       <header>
-        <div class="navbar">
-            <img src="images/png.png" alt="logo image" class="logo">
-            <!--Navigation-->
-            <nav>
-                <!--Search box container-->
-                <div class="navsearch">
-                    <form action="search_bar.php" class="search-box-container" >
-                        <input type="search" id="search-box" placeholder="Search for product..">
-                        <label for="search-box" class="id-search"></label>
-                    </form>
-                </div>
-                <a href="#">Home</a>
-                <a href="#">Admin</a>
-                <a href="#">Contact Us</a>
-                <div class="dropdown">
-                    <button class="dropbutton">More..</button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="order.php">Orders</a>
-                        <a href="cancelorder.php">Cancel an order</a>
-                        <a href="view.php">View orders</a>
-                        <a href="delivery.php">Delivery details</a>
-                    </div>
-                </div>   
-            </nav>
-        </div>
-       </header>
        <?php
           include 'connect.php';
           $db = $con;
@@ -70,11 +43,10 @@
           $q = "SELECT `order_id`, `quantity`, `productId`, `productName`, `totalPrice`, `deliveryAddress`, `deliveryTime` FROM ordertable";
           $result = mysqli_query($db, $q);
           ?>
-          <h1 style="text-align: center;">Your Orders</h1><br><br>
+          <h1 style="text-align: center;">Pending Orders</h1><br><br>
           <table style="border-collapse: collapse; width: 100%; text-align: center; padding: 10px;
           ">
             <tr>
-              <th>Serial Number</th>
               <th>Order ID</th>
               <th>Quantity</th>
               <th>Product ID</th>
@@ -82,14 +54,13 @@
               <th>Total Price</th>
               <th>Delivery Address</th>
               <th>Delivery Time</th>
+              <th>Cancel Order</th>
             </tr>
           <?php
           if (mysqli_num_rows($result) > 0) {
-            $sn=1;
             while($data = mysqli_fetch_assoc($result)) {
           ?>
           <tr>
-            <td><?php echo $sn; ?> </td>
             <td><?php echo $data['order_id']; ?> </td>
             <td><?php echo $data['quantity']; ?> </td>
             <td><?php echo $data['productId']; ?> </td>
@@ -97,14 +68,35 @@
             <td><?php echo $data['totalPrice']; ?> </td>
             <td><?php echo $data['deliveryAddress']; ?> </td>
             <td><?php echo $data['deliveryTime']; ?> </td>
+            <!--<td><?php /*echo "<div id='texttohide'><a href='cancel.php?order_id=".$data['order_id']."'>Cancel</a></div>";*/?></td>-->
+            <td><button class="open-btn" onclick="openForm()">Cancel</button></td>
+            <div class="cancel-popup" id="cancelForm">
+              <form action="cancel.php" class="cancel-container">
+              <div id="cancelForm-content">
+                <h3>Reason for cancellation</h3>
+                <input type="text" name="reason" placeholder="Enter here.." required>
+                <button type="submit" class="cancel-btn"><?php echo "<a href='cancel.php?order_id=".$data['order_id']."'>Continue</a></div>";?></button>
+                <button type="button" class="close-btn" onclick="closeForm()">X</button>
+              </div>
+            </form>
+          </div>
           <tr>
           <?php
-            $sn++;}} else { ?>
+            }} else { ?>
               <tr>
-              <td colspan="8">No data found</td>
+              <td colspan="8">No pending orders</td>
               </tr>
 
         <?php } ?>
-        </table>
+            </table>
+            <script>
+              function openForm() {
+                document.getElementById("cancelForm").style.display = "block";
+              }
+
+              function closeForm() {
+                document.getElementById("cancelForm").style.display = "none";
+              }
+            </script>
     </body>
 </html>

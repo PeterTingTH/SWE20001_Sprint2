@@ -12,33 +12,6 @@
       </style>
     </head>
     <body>
-        <header>
-            <div class="navbar">
-                <img src="images/png.png" alt="logo image" class="logo">
-                <!--Navigation-->
-                <nav>
-                    <!--Search box container-->
-                    <div class="navsearch">
-                        <form action="search_bar.php" class="search-box-container" >
-                            <input type="search" id="search-box" placeholder="Search for product..">
-                            <label for="search-box" class="id-search"></label>
-                        </form>
-                    </div>
-                    <a href="#">Home</a>
-                    <a href="#">Admin</a>
-                    <a href="#">Contact Us</a>
-                    <div class="dropdown">
-                        <button class="dropbutton">More..</button>
-                        <div class="dropdown-content" id="myDropdown">
-                            <a href="order.php">Orders</a>
-                            <a href="cancelorder.php">Cancel an order</a>
-                            <a href="view.php">View orders</a>
-                            <a href="delivery.php">Delivery details</a>
-                        </div>
-                    </div>  
-                </nav>
-            </div>
-        </header>
         <?php
             include 'connect.php';
             $db = $con;

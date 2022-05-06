@@ -22,24 +22,21 @@
         */
             require "conn.php";
             if(isset($_POST['submit-search'])){
-                $s_input = $_POST['search-input'];
-            }
 
-            $min_length = 3;
+                $s_input = mysqli_real_escape_string($conn, $_POST['search-input']);
 
-            if(strlen($s_input) >= $min_length){
-                $s_input = htmlspecialchars($s_input);
+                $sql = "SELECT * FROM search WHERE s_title LIKE '%$s_input%' OR s_Desc LIKE '%$s_input%' OR s_price LIKE '%$s_input%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResult = mysqli_num_rows($result);
 
-                $query = mysqli_query($con, "SELECT * FROM search WHERE 's_title' LIKE %$s_input% OR 's_Desc' LIKE %$s_input%");
-                if($rowcount = (mysqli_num_rows($query)) > 0){
-                    while($display = mysqli_fetch_array($query)){
-                        echo "<p><h2>".$display['s_title']."</h2><br>".$display['s_Desc']."</p>";
+                if ($queryResult > 0){
+                    while($display = mysqli_fetch_array($result)){
+                        echo "<h2>".$display['s_title']."</h2><p>".$display['s_Desc']."</p><p>".$display['s_price']."</p>";
                     }
-                } else{
-                    echo "Searched results cannot be found";
+                } else {
+                    echo "<script>alert('There are no results matching your search!');
+                    window. location. href='http://localhost/allan/search-button/';</script>";
                 }
-            } else {
-                echo "Your search has not reached the minimum character length (".$min_length.")";
             }
         ?>
     </body>
