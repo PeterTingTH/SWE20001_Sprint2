@@ -1,6 +1,12 @@
-<?php 
-require_once __DIR__.'/../../sprint2p1/navigation.php';
-?>
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=ul, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <title>Pinocone | Order</title>
+    </head>
+    <body>
     <h1 style="color: #616247FF; text-align: center; ">ORDER FORM</h1><br><br>
     <div class="divForm">
         <form id="orderForm" style=" padding: 10%; padding-left: 20px; background-image: url('images/catering.jpg'); height: 100%; background-position: center; background-size: cover; font-size: 20px; color: white;" method="post" action="" target="_self" onsubmit="return confirm('Would you please confirm your order? If Yes, press OK. If No, press Cancel. ');">
@@ -30,12 +36,4 @@ require_once __DIR__.'/../../sprint2p1/navigation.php';
             $ins = insertorder();
         ?>
     </div>
-    <a href="view.php">View Orders</a>
-    <!--JS link
-    <script src="script.js"></script>-->
-    <!--Footer-->
-    <footer>
-            <i><p>Copyright © Pinocone Online Catering System <br>All rights reserved.</p></i>
-        </footer>
-    </body>
 </html>

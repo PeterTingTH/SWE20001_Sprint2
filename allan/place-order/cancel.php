@@ -3,41 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=ul, initial-scale=1.0" />
+        <meta >
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <title>Pinocone | Cancel Order</title>
     </head>
     <body>
-       <header>
-        <div class="navbar">
-            <img src="images/png.png" alt="logo image" class="logo">
-            <!--Navigation-->
-            <nav>
-                <!--Search box container-->
-                <div class="navsearch">
-                    <form action="search_bar.php" class="search-box-container" >
-                        <input type="search" id="search-box" placeholder="Search for product..">
-                        <label for="search-box" class="id-search"></label>
-                    </form>
-                </div>
-                <a href="#">Home</a>
-                <a href="#">Admin</a>
-                <a href="#">Contact Us</a>
-                <div class="dropdown">
-                    <button class="dropbutton">More..</button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="order.php">Orders</a>
-                        <a href="cancelorder.php">Cancel an order</a>
-                        <a href="view.php">View orders</a>
-                        <a href="delivery.php">Delivery details</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-       </header>
-       <?php
+       <?php 
+            require 'view.php';
             $orderid = $_GET['order_id'];
-            date_default_timezone_set('Africa/Nairobi');
-            $date = strtotime(date('d-m-y h:i:s'));
+            //date_default_timezone_set('Africa/Nairobi');
+            //$date = strtotime(date('d-m-y h:i:s'));
            // $time = strtotime($_GET['deliveryTime']);
             //$difference = (abs($time-$date)/3600);
 /*
@@ -56,7 +31,6 @@
                     
                     //create a variable to select data from order table
                     $sql1 = "SELECT * from ordertable WHERE `order_id` = {$orderid}";
-    
                     $res1 = mysqli_query($con, $sql1);
     
                     //fetch data as an associative array and delete by row using the order id in 'view.php'
@@ -65,16 +39,24 @@
                         $sql2 = "DELETE FROM ordertable WHERE `order_id` = {$orderid}";
                         $res2 = mysqli_query($con, $sql2);
                         if(!$res2){
-                            die('Delete failed.'); // TO DO: better error handling
+                            die('Delete failed.');
                         }else{                        
                             echo "<script> alert('Your order was cancelled successfully'); </script>";
+
+                            mysqli_close($con);
+
+                            echo "<meta http-equiv='refresh' content='0'>";
                             //echo $time;
                         }
                     }else{
-                        die('error selecting order.');
+                        die('Error selecting order.');
                     }
                 }else{
-                    echo 'invalid order id';
+                    echo "<script> alert('Invalid order ID'); </script>";
+
+                           /* mysqli_close($con);
+
+                            echo "<meta http-equiv='refresh' content='0'>";*/
                     }
            /* } else {
                 echo "Your time limit of 1 hour before delivery time has passed.<br><br>";
@@ -82,8 +64,5 @@
             }*/
 
         ?>
-        <footer>
-            <i><p>Copyright © Pinocone Online Catering System <br>All rights reserved.</p></i>
-        </footer>
     </body>
 </html>
