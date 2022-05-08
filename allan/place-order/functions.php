@@ -15,7 +15,7 @@ function insertorder(){
   //$delTime = date('d-m-y h:i:s');
       
   // insert SQL code into the database
-  $sql = "INSERT INTO `ordertable` (`order_id`, `quantity`, `productId`, `productName`, `totalPrice`, `deliveryAddress`, `deliveryTime`) VALUES ('0', '$quantity', '$pId', '$pname', '$price', '$delAdd', '$delTime')";
+  $sql = "INSERT INTO `pendingorders` (`order_id`, `quantity`, `productId`, `productName`, `totalPrice`, `deliveryAddress`, `deliveryTime`) VALUES ('0', '$quantity', '$pId', '$pname', '$price', '$delAdd', '$delTime')";
       
   // insert in database 
   $rs = mysqli_query($con, $sql);
