@@ -13,7 +13,6 @@
     <meta charset="desciption" content="Confirmation Email">
     <meta charset="keyword" content="This is the confirmation email for Online Catering System">
     <link rel="stylesheet" href="stylekong.css"/> 
-    <title>Confirmation Email</title>
 </head>
 
 <body>
@@ -25,7 +24,7 @@
 
     <?php
     require_once('PHPMailer/PHPMailerAutoload.php');
-    require_once('configMail.php');
+    require_once('PHPMailer/configMail.php');
 
     $mail = new PHPMailer;
     $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
@@ -34,15 +33,18 @@
     $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;                                       
     $mail->Host = CONTACTFORM_SMTP_HOSTNAME;  
     $mail->Port = CONTACTFORM_SMTP_PORT;
-    $mail->isHTML();                             
+    $mail->isHTML(true);                             
     $mail->Username = CONTACTFORM_SMTP_USERNAME;              
     $mail->Password = CONTACTFORM_SMTP_PASSWORD;                                                             
     $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME); 
-    $mail->addAddress($email);    
+    $mail->AddAddress('kchekfung@gmail.com');    
     $mail->Subject = 'Confirmation Order';
-    $mail->Body    =  $message ;
-    
-    $mail->send();
+    $mail->Body    = "
+    Thank you for ordering at Pinocone Catering Company!
+    <br><a href='http://localhost/Kong/confirmationemail.php'>Click here to view your order!</a>
+    ";
+
+    $mail->Send();
     ?>
 
 <article>
@@ -151,6 +153,8 @@
     </div>
 
     <button class="btn_order">View order</button>
+
+
 
     
 

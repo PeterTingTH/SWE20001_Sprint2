@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Decription: Confirmation Email-->
+<!--Author: Kong Chek Fung-->
+<!--Date: 2 May 2022-->
+<!--Validated: OK 5 May 2022-->   
+
+<head>
+    <title>Confirmation Email</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=ul, initial-scale=1.0" />
+    <meta charset="author" content="Kong Chek Fung">
+    <meta charset="desciption" content="Feedback Email">
+    <meta charset="keyword" content="This is the feedback email for Online Catering System">
+    <link rel="stylesheet" href="stylekong.css"/> 
+    <title>Feedback email</title>
+</head>
+
+<body>
+    <header>
+        <h6>Feedback Form</h6>
+    </header>
+
+    <?php
+    require_once('PHPMailer/PHPMailerAutoload.php');
+    require_once('PHPMailer/configMail.php');
+
+    $mail = new PHPMailer;
+    $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
+    $mail->isSMTP();
+    $mail->SMTPAuth = true; 
+    $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;                                       
+    $mail->Host = CONTACTFORM_SMTP_HOSTNAME;  
+    $mail->Port = CONTACTFORM_SMTP_PORT;
+    $mail->isHTML(true);                             
+    $mail->Username = CONTACTFORM_SMTP_USERNAME;              
+    $mail->Password = CONTACTFORM_SMTP_PASSWORD;                                                             
+    $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME); 
+    $mail->AddAddress('kchekfung@gmail.com');    
+    $mail->Subject = 'Feedback Form';
+    $mail->Body    = "
+    Thank you for ordering at Pinocone Catering Company! This is the feedback form of Pinocone Catering Company. You can choose to fill it out or not. 
+    <br><a href='http://localhost/Kong/feedback.php'>Click here to fill your feedback!</a>
+    ";
+
+    $mail->Send();
+    ?>
+
+    <div class="feedback">
+        <p>Dear Customer, <br>
+           Thank you for getting your order at our company. We would like to know how we performed. Please spare some moments to give us your valuable feedback as it will help us in improving our services.
+        </p>
+        <h4>Please rate your service experince for the following parameters</h4>
+
+        <form method="post" action="action">
+            <label>1. Your overall experience with us?</label><br>
+
+            <span class="star-rating">
+                <input type="radio" name="rating1" value="1"><i></i>
+                <input type="radio" name="rating1" value="2"><i></i>
+                <input type="radio" name="rating1" value="3"><i></i>
+                <input type="radio" name="rating1" value="4"><i></i>
+                <input type="radio" name="rating1" value="5"><i></i>
+            </span>
+
+            <div class="clear"></div> 
+            <hr class="survey-hr">
+
+            <label>2. Friendliness and courtesy shown to you while recieving your vehicle</label><br>
+            <span class="star-rating">
+                <input type="radio" name="rating2" value="1"><i></i>
+                <input type="radio" name="rating2" value="2"><i></i>
+                <input type="radio" name="rating2" value="3"><i></i>
+                <input type="radio" name="rating2" value="4"><i></i>
+                <input type="radio" name="rating2" value="5"><i></i>
+            </span>
+
+            <div class="clear"></div> 
+            <hr class="survey-hr">
+
+            <label>3. Friendliness and courtesy shown to you while delivery of your vehicle</label><br><br/>
+            <div style="color:grey">
+                <span style="float:left">
+                POOR
+                </span>
+                <span style="float:right">
+                BEST
+                </span>   
+            </div>
+
+            <span class="scale-rating">
+                <label value="1">
+                <input type="radio" name="rating" >
+                <label style="width:100%;"></label>
+                </label>
+                <label value="2">
+                <input type="radio" name="rating" >
+                <label style="width:100%;"></label>
+                </label>
+                <label value="3">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="4">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="5">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="6">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="7">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="8">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="9">
+                <input type="radio" name="rating">
+                <label style="width:100%;"></label>
+                </label>
+                <label value="10">
+                <input type="radio" name="rating" value="10">
+                <label style="width:100%;"></label>
+                </label>
+              </span>
+
+              <div class="clear"></div> 
+              <hr class="survey-hr">
+
+              <label>4. Any Other suggestion:</label><br><br/>
+              <textarea cols="75" name="commentText" rows="5" style="width:100%"></textarea><br>
+              <br>
+              <div class="clear"></div> 
+              <input style="background:#43a7d5;color:#fff;padding:12px;border:0" type="submit" value="Submit your review">
+        </form>
+    </div>
+
+</body>
+</html>
