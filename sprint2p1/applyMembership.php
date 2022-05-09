@@ -21,9 +21,7 @@
         
         $loggedID = $_SESSION['custid'];
 
-        $custStatus = memberExist($conn,$loggedID);
-
-        if($custStatus["custMembership"] == 0){
+        if(!activeMemberPaymentExist($conn,$loggedID)){
     ?>
 
     <div class="membership_background">
@@ -67,7 +65,7 @@
     </div>
 
     <div id="membership_plan_options">
-        <form action="includes/subscribe.inc.php" method="post">
+        <form action="checkout.php" method="post">
 
             <label for="daily">
                 <div class="membership_plan_option">
@@ -106,7 +104,7 @@
             </label>
 
             <div class="membership_plan_subscribe">
-                <button type="submit" name="subscribeMembership">Subscribe Now</button>
+                <button type="submit" name="subscribeMembershipPayment">Subscribe Now</button>
             </div>
         </form>
     </div>

@@ -29,7 +29,6 @@
             $custPhone = $custExist["custPhone"];
             $custName = $custExist["custName"];
             $regDate = $custExist["regDate"];
-            $custStatus = memberExist($conn,$loggedID);
 
             if($custExist["custProfilePicStatus"] == 1){
                 $fileName = "uploads/profileImg/profile". $loggedID ."*";
@@ -44,7 +43,7 @@
             }
 
             echo "<h1>$custName</h1>";
-            if($custStatus["custMembership"] == 0){
+            if(!activeMemberPaymentExist($conn, $loggedID)){
                 echo "<p><a href=\"membership.php\" class=\"proceedMembershipPage\">Normal User</a></p>";
             } else {
                 echo "<p><a href=\"membership.php\" class=\"proceedMembershipPage\">Premium User</a></p>";

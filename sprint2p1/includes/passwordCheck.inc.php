@@ -75,7 +75,9 @@ if (isset($_POST['editAccPermission'])){
 
 } else if (isset($_POST['cancelMembershipPermission'])) {
     if ($pwdOK){
-        cancelMembership($conn, $loggedID);
+        $custExist = custExist($conn,$loggedID,"id");
+        $payID = $custExist["membershipPayID"];
+        cancelMembership($conn, $payID);
     } else {
         echo "
         <form action=\"../cancelMembershipConfirmation.php\" method=\"post\" name=\"promptPasswordAgain\">

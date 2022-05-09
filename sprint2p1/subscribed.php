@@ -21,13 +21,19 @@
                         <img src="images/subscribed.png" alt="subscribe">
                     </div>
                     <h2>Subscribed</h2>
-                    <p>Congragulations! You have successfully being a part of the Pinocone family!</p>
+                    <p>Congratulations! You have successfully being a part of the Pinocone family!</p>
                     <br>
-                    <p>Membership valid till 
+                    <p>Membership start from 
                         <?php 
                             $loggedID = $_SESSION['custid'];
-                            $custStatus = memberExist($conn,$loggedID);
-                            $memberExp = $custStatus["custMembershipExpire"];
+                            $active = activeMemberPaymentExist($conn,$loggedID);
+                            $memberStart = $active["membershipStart"];
+                            $memberExp = $active["membershipExpire"];
+                            echo date("Y-m-d",strtotime($memberStart)). '.';
+                        ?>
+                    </p>
+                    <p>Membership valid till 
+                        <?php 
                             echo date("Y-m-d",strtotime($memberExp)). '.';
                             mysqli_close($conn);
                         ?>
