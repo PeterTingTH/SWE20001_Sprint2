@@ -10,13 +10,14 @@ function createDatabase($conn){
     mysqli_query($conn, $sql);
 }
 
-function createTableUsers($conn){
+function createTableCust($conn){
     $sql = "CREATE TABLE IF NOT EXISTS custdata (
         custID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
         custName VARCHAR(128) NOT NULL,
         custEmail VARCHAR(128) NOT NULL,
         custPhone VARCHAR(11) NOT NULL,
         custPassword VARCHAR(128) NOT NULL,
+        membershipPayID INT(11) UNSIGNED NOT NULL DEFAULT 0,
         vKey VARCHAR(64) NOT NULL,
         verified TINYINT(1) NOT NULL DEFAULT 0,
         custProfilePicStatus TINYINT(1) NOT NULL DEFAULT 0,
@@ -24,7 +25,9 @@ function createTableUsers($conn){
     )";
     
     mysqli_query($conn, $sql);
+}
 
+function createTableAdmin($conn){
     $sql = "CREATE TABLE IF NOT EXISTS admindata (
         adminID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
         adminName VARCHAR(128) NOT NULL,
@@ -78,18 +81,30 @@ function createTableDeleteAcc($conn){
     mysqli_query($conn, $sql);
 }
 
-function createTableMembership($conn){
-    $sql = "CREATE TABLE IF NOT EXISTS custmembership (
-        memberID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+function createTableMembershipPayment($conn){
+    $sql = "CREATE TABLE IF NOT EXISTS custmembershippayment (
+        membershipPayID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
         custID INT(11) UNSIGNED NOT NULL,
-        custMembership TINYINT(1) NOT NULL DEFAULT 0,
-        custMembershipExpire DATETIME,
-        reminded TINYINT(1) NOT NULL DEFAULT 0,
-        FOREIGN KEY (custID) REFERENCES custdata(custID) ON DELETE CASCADE
+        membershipType VARCHAR(40) NOT NULL,
+        membershipPrice DECIMAL(5,2) NOT NULL,
+        membershipValid TINYINT(1) NOT NULL DEFAULT 1,
+        membershipStart TIMESTAMP,
+        membershipExpire DATETIME,
+        membershipCancelled TINYINT(1) NOT NULL DEFAULT 0,
+        reminded TINYINT(1) NOT NULL DEFAULT 0
     )";
     
     mysqli_query($conn, $sql);
 }
+
+/*      memberID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+custID INT(11) UNSIGNED NOT NULL,
+custMembership TINYINT(1) NOT NULL DEFAULT 0,
+custMembershipStart TIMESTAMP,
+custMembershipExpire DATETIME,
+reminded TINYINT(1) NOT NULL DEFAULT 0,
+*/
+
 
 $serverName = "localhost";
 $dBUsername = "root";
@@ -104,7 +119,8 @@ createDatabase($conn);
 $conn = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
 checkConnection($conn);
 
-createTableUsers($conn);
+createTableCust($conn);
+createTableAdmin($conn);
 createTablePasswordReset($conn);
 createTableDeleteAcc($conn);
-createTableMembership($conn);
+createTableMembershipPayment($conn);

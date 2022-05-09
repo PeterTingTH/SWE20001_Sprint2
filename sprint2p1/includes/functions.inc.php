@@ -219,8 +219,8 @@ function deleteAccKeyExist($conn, $deleteAccKey){
     }
 }
 
-function memberExist($conn, $loggedID){
-    $sql = "SELECT * FROM custmembership WHERE custID = ?;";
+function activeMemberPaymentExist($conn, $loggedID){
+    $sql = "SELECT * FROM custmembershippayment WHERE custID = ? AND membershipValid = 1;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         mysqli_close($conn);
@@ -229,6 +229,30 @@ function memberExist($conn, $loggedID){
     }
 
     mysqli_stmt_bind_param($stmt, "s", $loggedID);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if($row = mysqli_fetch_assoc($resultData)){
+        mysqli_stmt_close($stmt);
+        return $row;
+    } else {
+        mysqli_stmt_close($stmt);
+        $result = false;
+        return $result;
+    }
+}
+
+function memberPaymentExist($conn, $payID){
+    $sql = "SELECT * FROM custmembershippayment WHERE membershipPayID = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        mysqli_close($conn);
+        header("location: ../index.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $payID);
     mysqli_stmt_execute($stmt);
 
     $resultData = mysqli_stmt_get_result($stmt);
@@ -279,20 +303,6 @@ function createCustomer($conn, $name, $email, $phone, $pwd, $vkey){
     }
 
     mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $phone, $pwd, $vkey);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-
-    $last_id = mysqli_insert_id($conn);
-
-    $sql = "INSERT INTO custmembership (custID) VALUES (?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)){
-        mysqli_close($conn);
-        header("location: ../signup.php?error=stmtfailed");
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "s", $last_id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }
@@ -366,70 +376,76 @@ function deleteUnactivateAccount($conn, $vkey){
 // Send keys
 function sendVKey($email, $vkey){
     require_once('../PHPMailer/PHPMailerAutoload.php');
+    require_once('../config/configMail.php');
 
     $mail = new PHPMailer();
+    $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = '465';
+    $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
+    $mail->Host = CONTACTFORM_SMTP_HOSTNAME;
+    $mail->Port = CONTACTFORM_SMTP_PORT;
     $mail->isHTML();
-    $mail->Username = 'pinocone.co@gmail.com';
-    $mail->Password = 'SWE20001';
-    $mail->SetFrom('pinocone.co@gmail.com');
+    $mail->Username = CONTACTFORM_SMTP_USERNAME;
+    $mail->Password = CONTACTFORM_SMTP_PASSWORD;
+    $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
+    $mail->addAddress($email);
     $mail->Subject = 'Pinocone Account Verification';
     $mail->Body = "
     Thank you for registering at Pinocone Catering Company!
     <br><a href='http://localhost/sprint2p1/includes/verify.inc.php?vkey=$vkey'>Click here to activate your account!</a>
     <br><a href='http://localhost/sprint2p1/includes/verify.inc.php?vkey=$vkey&delete=true'>Click here if this is not you.</a>
     ";
-    $mail->AddAddress("$email");
 
     $mail->Send();
 }
 
 function sendPasswordKey($email,$passResetKey){
     require_once('../PHPMailer/PHPMailerAutoload.php');
+    require_once('../config/configMail.php');
 
     $mail = new PHPMailer();
+    $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = '465';
+    $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
+    $mail->Host = CONTACTFORM_SMTP_HOSTNAME;
+    $mail->Port = CONTACTFORM_SMTP_PORT;
     $mail->isHTML();
-    $mail->Username = 'pinocone.co@gmail.com';
-    $mail->Password = 'SWE20001';
-    $mail->SetFrom('pinocone.co@gmail.com');
+    $mail->Username = CONTACTFORM_SMTP_USERNAME;
+    $mail->Password = CONTACTFORM_SMTP_PASSWORD;
+    $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
+    $mail->addAddress($email);
     $mail->Subject = 'Pinocone Reset Password';
     $mail->Body = "
     <br><a href='http://localhost/sprint2p1/includes/checkResetKey.inc.php?passResetKey=$passResetKey'>Click here to reset your password!</a>
     <br><a href='http://localhost/sprint2p1/includes/checkResetKey.inc.php?passResetKey=$passResetKey&delete=true'>Click here if you did not ask for this.</a>
     ";
-    $mail->AddAddress("$email");
 
     $mail->Send();
 }
 
 function sendDeleteKey($email,$deleteAccKey){
     require_once('../PHPMailer/PHPMailerAutoload.php');
+    require_once('../config/configMail.php');
 
     $mail = new PHPMailer();
+    $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = '465';
+    $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
+    $mail->Host = CONTACTFORM_SMTP_HOSTNAME;
+    $mail->Port = CONTACTFORM_SMTP_PORT;
     $mail->isHTML();
-    $mail->Username = 'pinocone.co@gmail.com';
-    $mail->Password = 'SWE20001';
-    $mail->SetFrom('pinocone.co@gmail.com');
+    $mail->Username = CONTACTFORM_SMTP_USERNAME;
+    $mail->Password = CONTACTFORM_SMTP_PASSWORD;
+    $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
+    $mail->addAddress($email);
     $mail->Subject = 'Pinocone Delete Account';
     $mail->Body = "
     <br><a href='http://localhost/sprint2p1/includes/checkDeleteKey.inc.php?deleteAccKey=$deleteAccKey'>Click here to confirm delete your account!</a>
     <br><a href='http://localhost/sprint2p1/includes/checkDeleteKey.inc.php?deleteAccKey=$deleteAccKey&delete=true'>Click here if you did not ask for this.</a>
     ";
-    $mail->AddAddress("$email");
 
     $mail->Send();
 }
@@ -527,22 +543,24 @@ function sendDeleteAcc($conn, $email){
 
 function sendRenewalReminder($email, $memberExpire){
     require_once('PHPMailer\PHPMailerAutoload.php');
+    require_once('config/configMail.php');
 
     $mail = new PHPMailer();
+    $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = '465';
+    $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
+    $mail->Host = CONTACTFORM_SMTP_HOSTNAME;
+    $mail->Port = CONTACTFORM_SMTP_PORT;
     $mail->isHTML();
-    $mail->Username = 'pinocone.co@gmail.com';
-    $mail->Password = 'SWE20001';
-    $mail->SetFrom('pinocone.co@gmail.com');
+    $mail->Username = CONTACTFORM_SMTP_USERNAME;
+    $mail->Password = CONTACTFORM_SMTP_PASSWORD;
+    $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
+    $mail->addAddress($email);
     $mail->Subject = 'Pinocone Membership Renewal Reminder';
     $mail->Body = "
     Hello, thanks for subscribing to Pinocone membership! Your membership will be expiring after three days. To continue enjoy the benefits, please take note to renew once the membership expired.
     <br>Membership valid till $memberExpire.";
-    $mail->AddAddress("$email");
 
     $mail->Send();
 }
@@ -585,15 +603,32 @@ function removeCustProfilePic($custID){
 }
 
 // Subscribe Membership
-function subscribeMembership($conn,$applyID,$memberEx){
-    $query = "UPDATE custmembership SET custMembership = 1, custMembershipExpire = '$memberEx', reminded = 0 WHERE custID = '$applyID';";
+function subscribeMembership($conn,$applyID,$memberType,$memberPrice,$memberEx){
+    $sql = "INSERT INTO custmembershippayment (custID, membershipType, membershipPrice, membershipExpire) VALUES (?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        mysqli_close($conn);
+        header("location: ../applyMembership.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $applyID, $memberType, $memberPrice, $memberEx);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    $last_id = mysqli_insert_id($conn);
+
+    $query = "UPDATE custdata SET membershipPayID = '$last_id' WHERE custID = '$applyID';";
     $result = mysqli_query($conn,$query);
+
+    mysqli_close($conn);
 }
 
 // Cancel Membership
-function cancelMembership($conn,$loggedID){
-    $query = "UPDATE custmembership SET custMembership = 0, custMembershipExpire = null, reminded = 0 WHERE custID = '$loggedID';";
+function cancelMembership($conn,$payID){
+    $query = "UPDATE custmembershippayment SET membershipValid = 0, membershipCancelled = 1 WHERE membershipPayID = '$payID';";
     $result = mysqli_query($conn,$query);
+
     mysqli_close($conn);
     header("location: ../membership.php");
     exit();
@@ -603,22 +638,23 @@ function cancelMembership($conn,$loggedID){
 function checkMembershipExpire($conn){
     date_default_timezone_set("Asia/Kuala_Lumpur");
 
-    $qry = mysqli_query($conn, "SELECT * FROM custmembership WHERE custMembership = 1");
+    $qry = mysqli_query($conn, "SELECT * FROM custmembershippayment WHERE membershipValid = 1 AND membershipCancelled = 0");
 
     while($result = mysqli_fetch_assoc($qry)){
-        $custID = $result["custID"];
-        $memberExpire = $result["custMembershipExpire"];
-        $remindTime = date('Y-m-d H:i:s', strtotime('- 3 days'));
+        $payID = $result["membershipPayID"];
+        $memberExpire = $result["membershipExpire"];
+        $remindTime = date('Y-m-d H:i:s', strtotime($memberExpire . '- 3 days'));
         $currentTime = date('Y-m-d H:i:s');
         if($currentTime >= $memberExpire){
-            $query = "UPDATE custmembership SET custMembership = 0 WHERE custID = '$custID';";
+            $query = "UPDATE custmembershippayment SET membershipValid = 0 WHERE membershipPayID = '$payID';";
             $result = mysqli_query($conn,$query);
-        } else if( $currentTime >= $remindTime){
+        } else if($currentTime >= $remindTime){
             if($result["reminded"] == 0){
+                $custID = $result["custID"];
                 $custExist = custExist($conn,$custID,"id");
                 $email = $custExist["custEmail"];
                 sendRenewalReminder($email,$memberExpire);
-                $query = "UPDATE custmembership SET reminded = 1 WHERE custID = '$custID';";
+                $query = "UPDATE custmembershippayment SET reminded = 1 WHERE membershipPayID = '$payID';";
                 $result = mysqli_query($conn,$query);
             }
         }
@@ -629,22 +665,23 @@ function checkMembershipExpire($conn){
 function checkMembershipExpireCron($conn){
     date_default_timezone_set("Asia/Kuala_Lumpur");
 
-    $qry = mysqli_query($conn, "SELECT * FROM custmembership WHERE custMembership = 1");
+    $qry = mysqli_query($conn, "SELECT * FROM custmembershippayment WHERE membershipValid = 1 AND membershipCancelled = 0");
 
     while($result = mysqli_fetch_assoc($qry)){
-        $custID = $result["custID"];
-        $memberExpire = $result["custMembershipExpire"];
-        $remindTime = date('Y-m-d H:i:s', strtotime('- 3 days'));
+        $payID = $result["membershipPayID"];
+        $memberExpire = $result["membershipExpire"];
+        $remindTime = date('Y-m-d H:i:s', strtotime($memberExpire . '- 3 days'));
         $currentTime = date('Y-m-d H:i:s');
         if($currentTime >= $memberExpire){
-            $query = "UPDATE custmembership SET custMembership = 0 WHERE custID = '$custID';";
+            $query = "UPDATE custmembershippayment SET membershipValid = 0 WHERE membershipPayID = '$payID';";
             $result = mysqli_query($conn,$query);
-        } else if( $currentTime >= $remindTime){
+        } else if($currentTime >= $remindTime){
             if($result["reminded"] == 0){
+                $custID = $result["custID"];
                 $custExist = custExist($conn,$custID,"id");
                 $email = $custExist["custEmail"];
                 sendRenewalReminderCron($email,$memberExpire);
-                $query = "UPDATE custmembership SET reminded = 1 WHERE custID = '$custID';";
+                $query = "UPDATE custmembershippayment SET reminded = 1 WHERE membershipPayID = '$payID';";
                 $result = mysqli_query($conn,$query);
             }
         }
@@ -653,22 +690,24 @@ function checkMembershipExpireCron($conn){
 
 function sendRenewalReminderCron($email, $memberExpire){
     require_once('../PHPMailer/PHPMailerAutoload.php');
+    require_once('../config/configMail.php');
 
     $mail = new PHPMailer();
+    $mail->SMTPDebug = CONTACTFORM_PHPMAILER_DEBUG_LEVEL;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = '465';
+    $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
+    $mail->Host = CONTACTFORM_SMTP_HOSTNAME;
+    $mail->Port = CONTACTFORM_SMTP_PORT;
     $mail->isHTML();
-    $mail->Username = 'pinocone.co@gmail.com';
-    $mail->Password = 'SWE20001';
-    $mail->SetFrom('pinocone.co@gmail.com');
+    $mail->Username = CONTACTFORM_SMTP_USERNAME;
+    $mail->Password = CONTACTFORM_SMTP_PASSWORD;
+    $mail->SetFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
+    $mail->addAddress($email);
     $mail->Subject = 'Pinocone Membership Renewal Reminder';
     $mail->Body = "
     Hello, thanks for subscribing to Pinocone membership! Your membership will be expiring after three days. To continue enjoy the benefits, please take note to renew once the membership expired.
     <br>Membership valid till $memberExpire.";
-    $mail->AddAddress("$email");
 
     $mail->Send();
 }

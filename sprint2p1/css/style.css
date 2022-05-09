@@ -451,3 +451,201 @@ nav{
 .membership_plan_option input[type="radio"]{
 	display: none;
 }
+
+/* Checkout Page */
+.checkoutSection {
+	background-image: url(../images/checkoutBackground.jpg);
+    background-attachment:fixed;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    margin:2%;
+    padding:2%;
+}
+
+.checkoutSection h1{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 45px;
+}
+
+.checkoutSection h2{
+    text-align: left;
+    font-size: 20px;
+}
+
+.checkoutSection h3{
+    text-align: left;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: auto;
+}
+
+.checkoutSection .address_word{
+    display:flex;
+}
+
+.checkoutSection .address_sign{
+    margin-left: auto;
+}
+
+.checkoutSection hr{ 
+    display: block; 
+    overflow: hidden; 
+    border-style: inset; 
+    border-width: 2px;
+}
+
+.checkoutSection .thumbnails {
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    padding: 3px; 
+    max-width: 130%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+    
+.checkoutSection .thumbnails img{
+	width: 100%;
+	margin:auto;
+}
+
+.checkoutSection .thumbnails:hover{
+	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+  
+.checkoutSection .food_word{
+    display: flex;
+    flex-direction: row;
+}
+
+.checkoutSection .selection_address{
+	border-style: groove;
+    width: auto;
+    height: 600px;
+}
+
+.checkoutSection h4{
+    color: crimson;
+    margin-top: 78px;
+    margin-left: 20px;
+}
+
+.checkoutSection label{
+    margin-bottom: 10px;
+    display: block;
+}
+
+.checkoutSection input[type=text] {
+    width: 96%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.checkoutSection select{
+    width: auto;
+    height: auto;
+}
+
+.checkoutSection a{
+    text-decoration: none;
+    color: black;
+}
+
+.checkoutSection a:hover{
+    text-decoration: none;
+    font-weight: none;
+    color: darkorange;
+}
+
+
+.checkoutSection .border_shipping{
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.checkoutSection .option{
+    margin-top: 10px;
+}
+
+.checkoutSection .message{
+    margin-top: 2px;
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.checkoutSection input[type=text1] {
+    width: 96%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.checkoutSection .order_text{
+    display:flex;
+}
+
+.checkoutSection h5{
+    color: crimson;
+    margin-left: auto;
+    font-size: medium; 
+    margin-top: 15px;  
+}
+
+.checkoutSection .paymentOption{
+    margin-top: 2px;
+    background-color: #f2f2f2;
+    padding: 5px 20px 2px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    display: flex;
+}
+
+.checkoutSection .payment_method{
+    margin-left: auto;
+    margin-top: 14px;
+}
+
+.checkoutSection .merchandise{
+    display: flex;
+}
+
+.checkoutSection .summary{
+    margin-top: 2px;
+    background-color: #f2f2f2;
+    padding: 5px 20px 2px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    
+}
+
+.checkoutSection h6{
+    color: crimson;
+    margin-left: auto;
+    font-size: medium; 
+    margin-top: 12px;  
+}
+
+.checkoutSection .btn_checkout{
+    border: none;
+    background-color:rgb(197, 238, 238);
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 5px;
+    display:inline-block;
+    margin-left: 45%;
+    
+}
+
+.checkoutSection .btn_checkout:hover{
+    background: darkorange;
+}

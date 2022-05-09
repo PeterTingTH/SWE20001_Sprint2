@@ -21,9 +21,7 @@
         
         $loggedID = $_SESSION['custid'];
 
-        $custStatus = memberExist($conn,$loggedID);
-
-        if($custStatus["custMembership"] == 0){
+        if(!activeMemberPaymentExist($conn,$loggedID)){
     ?>
 
     <div class="form_body one_column_form">
@@ -35,12 +33,17 @@
                     </div>
                     <h2>Inactive Membership</h2>
                     <p>You are not subscibed to Pinocone Membership!</p>
-                    <?php 
+                    <?php
+                        $custExist = custExist($conn, $loggedID, "id");
+                        $payID = $custExist["membershipPayID"];
 
-                        $memberExp = $custStatus["custMembershipExpire"];
-
-                        if($memberExp != null){
-                            echo "<p>Last membership valid till " . date("Y-m-d",strtotime($memberExp)) . '.</p>';
+                        if(!$payID == 0){
+                            $expMembership = memberPaymentExist($conn, $payID);
+                            $expMembershipCancelled = $expMembership["membershipCancelled"];
+                            $expMembershipDate = $expMembership["membershipExpire"];
+                            if($expMembershipCancelled == 0){
+                                echo "<p>Last membership valid till " . date("Y-m-d",strtotime($expMembershipDate)) . '.</p>';
+                            }
                         }
                     ?>
                     <div class="membership_page_button">
@@ -64,10 +67,19 @@
                     </div>
                     <h2>Active Membership</h2>
                     <p>You have subscibed to Pinocone Membership!</p>
+                    <p>Membership start from 
+                        <?php 
+                            $loggedID = $_SESSION['custid'];
+                            $active = activeMemberPaymentExist($conn,$loggedID);
+                            $memberStart = $active["membershipStart"];
+                            $memberExp = $active["membershipExpire"];
+                            echo date("Y-m-d",strtotime($memberStart)). '.';
+                        ?>
+                    </p>
                     <p>Membership valid till 
                         <?php 
-                            $memberExp = $custStatus["custMembershipExpire"];
                             echo date("Y-m-d",strtotime($memberExp)). '.';
+                            mysqli_close($conn);
                         ?>
                     </p>
                     <div class="membership_page_button">
