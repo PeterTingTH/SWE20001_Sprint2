@@ -7,7 +7,7 @@ $password = "";
 
 $conn = @mysqli_connect($servername, $username, $password);
 
-$sql = "CREATE DATABASE itemcartdb";
+$sql = "CREATE DATABASE IF NOT EXISTS itemcartdb ";
 
 mysqli_query($conn, $sql);
 mysqli_close($conn); 
@@ -117,25 +117,5 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             }
         }
     }
-    if(isset($_POST['modquantity']))
-    {
-        $quantity = $_POST['modquantity'];
-        foreach($_SESSION['cart'] as $key => $value)
-        {
-            $itemname = $value['Item_Name'];
-            if($value['Item_Name']==$_POST['Item_Name'])
-            {   
-                $sql = "UPDATE itemcart set Quantity ='$quantity' WHERE item_name='".$itemname."'";
-                $result = mysqli_query($conn,$sql) or die ( mysqli_error($conn));
-                $_SESSION['cart'][$key]['Quantity']=$_POST ['modquantity'];
-
-            echo"<script>
-                window.location.href='mycart.php';
-                </script>";
-            }
-        }
-    }
     
-
-
 }

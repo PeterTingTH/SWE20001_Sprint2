@@ -15,45 +15,50 @@ $dates1 = date("d-m-Y");
 //IF1 statement for detecting if the food is warm or cold//
 //If isset warmfood//
 //Date
-echo"
-    <p>Date: 
-   
-        <select name='date' id='date' >";
-        echo"<option value=''>Select a date</option>
-        <option value=$dates1 id='dates' name='first' >Deliver Today ($dates1)</option>";
-        foreach(range($dates1,intval($dates2)) as $time) {
-        $day +=1 ;
-        $d2=strtotime("+{$day} day");
-        $enddates= date("d-m-Y", $d2);
-   		echo"<option value=$enddates name='second'>$enddates</option>";
-        
-        }
-        
-        echo "</select>
-        
-     </p>
 
-    <p>Time: 
-        <select name='time' id='time'>
-        <option value=''>Select a time</option>
-        <option value=$totaltime>$date - $date2 </option>";
-       foreach(range($date,intval('21:00')) as $time) {
-       $hours +=1 ;
-        if ($hours > 0){
-        $d =strtotime("+{$hours} hours {$defaulttime} minutes");
-       	$startdate = date("H:i",mktime($time+1));
- 		$enddate= date("H:i", $d);
-   		echo"<option value=$totaltime>$startdate - $enddate</option>";
-        }
-        }
-        
-
+       
         
 
 
+
         
-        echo "</select>
-     </p>
+        echo "
+        <p>Date:
+        
+        <select id='date2' onchange='ChangeSecondList(this.options[this.selectedIndex].value)'>
+        <option value=''>Select a date</option>
+        </select>
+        </p>
+        
+        <div id='static-list-div' style='display:block;'>
+        <p>Time:
+       <select>
+<option>&#8679; Select a delivery date</option>
+<option>&#8679; from the above </option>
+</select>
+</p>
+</div>
+<div id='dynamic-list-div' style='display:none;'>
+<p>Time:
+<select id='dynamic-list' name='serving'>
+</p>
+</select>
+</div>
+
+<div id='dynamic-list-div2' style='display:none;'>
+<p>Time:
+<select id='dynamic-list2' name='serving'>";
+foreach(range($date,intval('21:00')) as $time) {
+    $hours +=1 ;
+     if ($hours > 0){
+     $d =strtotime("+{$hours} hours {$defaulttime} minutes");
+        $startdate = date("H:i",mktime($time+1));
+      $enddate= date("H:i", $d);
+        echo"<option value=$totaltime>$startdate - $enddate</option>";
+     }
+     };
+echo "</select>
+</p>
+</div>
 ";
 ?>
-

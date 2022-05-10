@@ -183,9 +183,8 @@ Remark: -
 <div class="option">
 <label for="Delivery Time">Delivery Time</label>
 <hr></hr>
-<?php include('../Leonard/calculatetime(norange).php')
 
-?>
+<?php include('../Leonard/calculatetimendate.php')?>
 </div>
 </div>
 <br>
@@ -257,6 +256,6 @@ Remark: -
 
 </footer>
 
-
+<script src='../Leonard/calculatetime.js'></script>
 </body>
 </html>
