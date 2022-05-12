@@ -17,7 +17,6 @@ for (var day = 0; day < 4; day++) {
 
 }
 
-document.write(currentime);
 
 
 function ChangeSecondList(value) {
