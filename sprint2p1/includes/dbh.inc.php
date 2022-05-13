@@ -97,15 +97,6 @@ function createTableMembershipPayment($conn){
     mysqli_query($conn, $sql);
 }
 
-/*      memberID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-custID INT(11) UNSIGNED NOT NULL,
-custMembership TINYINT(1) NOT NULL DEFAULT 0,
-custMembershipStart TIMESTAMP,
-custMembershipExpire DATETIME,
-reminded TINYINT(1) NOT NULL DEFAULT 0,
-*/
-
-
 $serverName = "localhost";
 $dBUsername = "root";
 $dBPassword = "";

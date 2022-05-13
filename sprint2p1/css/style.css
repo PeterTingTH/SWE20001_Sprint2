@@ -634,16 +634,19 @@ nav{
     margin-top: 12px;  
 }
 
+.checkoutButtons{
+	width: 250px;
+	display: block;
+	margin: auto;
+}
+
 .checkoutSection .btn_checkout{
     border: none;
     background-color:rgb(197, 238, 238);
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 5px;
     display:inline-block;
-    margin-left: 45%;
-    
 }
 
 .checkoutSection .btn_checkout:hover{

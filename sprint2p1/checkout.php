@@ -103,8 +103,11 @@
 
             <input type="hidden" name="membershipPlanOption" value="<?php echo $membershipPlanOption;?>">
             
-            
-            <button class="btn_checkout" name ="subscribeMembership">Checkout</button>
+            <div class="checkoutButtons">
+                <button class="btn_checkout" name ="subscribeMembershipBack">Back</button>
+
+                <button class="btn_checkout" name ="subscribeMembership">Checkout</button>
+            </div>
 
         </form>
 

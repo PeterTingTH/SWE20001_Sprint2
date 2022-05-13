@@ -638,21 +638,21 @@ function cancelMembership($conn,$payID){
 function checkMembershipExpire($conn){
     date_default_timezone_set("Asia/Kuala_Lumpur");
 
-    $qry = mysqli_query($conn, "SELECT * FROM custmembershippayment WHERE membershipValid = 1 AND membershipCancelled = 0");
+    $qry = mysqli_query($conn, "SELECT * FROM custdata WHERE membershipPayID != 0");
 
     while($result = mysqli_fetch_assoc($qry)){
         $payID = $result["membershipPayID"];
-        $memberExpire = $result["membershipExpire"];
+        $payIDDetails = memberPaymentExist($conn,$payID);
+        $memberExpire = $payIDDetails["membershipExpire"];
+        $reminded = $payIDDetails["reminded"];
         $remindTime = date('Y-m-d H:i:s', strtotime($memberExpire . '- 3 days'));
         $currentTime = date('Y-m-d H:i:s');
         if($currentTime >= $memberExpire){
             $query = "UPDATE custmembershippayment SET membershipValid = 0 WHERE membershipPayID = '$payID';";
             $result = mysqli_query($conn,$query);
         } else if($currentTime >= $remindTime){
-            if($result["reminded"] == 0){
-                $custID = $result["custID"];
-                $custExist = custExist($conn,$custID,"id");
-                $email = $custExist["custEmail"];
+            if($reminded == 0){
+                $email = $result["custEmail"];
                 sendRenewalReminder($email,$memberExpire);
                 $query = "UPDATE custmembershippayment SET reminded = 1 WHERE membershipPayID = '$payID';";
                 $result = mysqli_query($conn,$query);
@@ -665,21 +665,21 @@ function checkMembershipExpire($conn){
 function checkMembershipExpireCron($conn){
     date_default_timezone_set("Asia/Kuala_Lumpur");
 
-    $qry = mysqli_query($conn, "SELECT * FROM custmembershippayment WHERE membershipValid = 1 AND membershipCancelled = 0");
+    $qry = mysqli_query($conn, "SELECT * FROM custdata WHERE membershipPayID != 0");
 
     while($result = mysqli_fetch_assoc($qry)){
         $payID = $result["membershipPayID"];
-        $memberExpire = $result["membershipExpire"];
+        $payIDDetails = memberPaymentExist($conn,$payID);
+        $memberExpire = $payIDDetails["membershipExpire"];
+        $reminded = $payIDDetails["reminded"];
         $remindTime = date('Y-m-d H:i:s', strtotime($memberExpire . '- 3 days'));
         $currentTime = date('Y-m-d H:i:s');
         if($currentTime >= $memberExpire){
             $query = "UPDATE custmembershippayment SET membershipValid = 0 WHERE membershipPayID = '$payID';";
             $result = mysqli_query($conn,$query);
         } else if($currentTime >= $remindTime){
-            if($result["reminded"] == 0){
-                $custID = $result["custID"];
-                $custExist = custExist($conn,$custID,"id");
-                $email = $custExist["custEmail"];
+            if($reminded == 0){
+                $email = $result["custEmail"];
                 sendRenewalReminderCron($email,$memberExpire);
                 $query = "UPDATE custmembershippayment SET reminded = 1 WHERE membershipPayID = '$payID';";
                 $result = mysqli_query($conn,$query);

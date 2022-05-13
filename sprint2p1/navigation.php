@@ -30,15 +30,6 @@ if(isset($_SESSION['custid'])){
     echo '</div>';
     echo '<ul class="nav-links">';
     echo '<li><a href="profile.php" class="position_profile">Profile</a></li>';
-    echo '<div class="dropdown">';
-    echo '<button class="dropbutton">More..</button>';
-    echo '<div class="dropdown-content" id="myDropdown">';
-    echo '<a href="../allan/place-order/order.php">Orders</a>';
-    echo '<a href="cancelorder.php">Cancel an order</a>';
-    echo '<a href="view.php">View orders</a>';
-    echo '<a href="delivery.php">Delivery details</a>';
-    echo '</div>';
-    echo '</div> ';
     echo '<li><a href="includes/logout.inc.php">Log Out</a></li>';
     echo '</ul>';
     echo '</nav>';

@@ -37,6 +37,9 @@ if (isset($_POST["subscribeMembership"])){
         header("location: ../index.php");
         exit();
     }
+} else if (isset($_POST["subscribeMembershipBack"])){
+    header("location: ../applyMembership.php");
+    exit();
 } else {
     header("location: ../index.php");
     exit();
