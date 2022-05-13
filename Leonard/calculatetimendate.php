@@ -26,15 +26,15 @@ $dates1 = date("d-m-Y");
         <p>Date:
         
         <select id='date2' onchange='ChangeSecondList(this.options[this.selectedIndex].value)'>
-        <option value=''>Select a date</option>
+        <option selected disabled hidden value=''>Select a date</option>
         </select>
         </p>
         
         <div id='static-list-div' style='display:block;'>
         <p>Time:
        <select>
-<option>&#8679; Select a delivery date</option>
-<option>&#8679; from the above </option>
+<option selected disabled>&#8679; Select a delivery date</option>
+<option disabled>&#8679; from the above </option>
 </select>
 </p>
 </div>

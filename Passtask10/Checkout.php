@@ -115,75 +115,46 @@ No.68, Jalan Tun Abang Haji Openg,<br>
 <hr></hr>
 
 <h2>Pinocone Catering Company</h2>
+<?php
+     $itemimg = $_POST['Item_Img'];
+     $itemname = $_POST['Item_Name'];
+     $price = $_POST['Price'];
+     $quantity = $_POST['Quantity'];
+    $subtotal = $_POST['Subtotal'];
+    $total = 0;
+    
+     if(isset($_SESSION['cart'])) {
+        foreach($_SESSION['cart'] as $key => $value)
+        {
+            $count = count($_SESSION['cart']);
+            $value['Subtotal'] = $value['Price'] * $value['Quantity'];
 
-<a target="_blank" href="images/Food_1.jpg">
-<div class="food_word">
-<img class="thumbnails" src="images/Food_1.jpg" alt="food photo"></a>
-<h3>Idli Dosa<br>
-<br>
-RM 12.70<br>
-<br>
-Remark: -
-</h3>
-</div>
- 
+            echo"<a target='_blank' href='../shoppingcart/$value[Item_Img]'>
+            <div class='food_word'>
+            <img class='thumbnails' src='../shoppingcart/$value[Item_Img]' alt='food photo'></a>
+            <h3>$value[Item_Name]<br>
+            <br>
+            RM $value[Subtotal]<br>
+            <br>
+            Remark: -
+            </h3>
+            </div>";
+            
+            $total += $value['Subtotal'];
+        }
 
-
-<a target="_blank" href="images/Food_6.jpg">
-<div class="food_word">
-<img class="thumbnails" src="images/Food_6.jpg" alt="food photo"></a>
-<h3>Traditional Indian Dishes Vegetables<br>
-<br>
-RM 25.80<br>
-<br>
-Remark: -
-</h3>
-</div>
-
-
-
-<a target="_blank" href="images/Food_3.jpg">
-<div class="food_word">
-<img class="thumbnails" src="images/Food_3.jpg" alt="food photo"></a>
-<h3>Chicken Biryani with Kabab<br>
-<br>
-RM 18.90<br>
-<br>
-Remark: -
-</h3>
-</div>
+        
+    }
+    $fortotal = number_format($total, 2);
 
 
+?>
 
-<a target="_blank" href="images/Drink_1.jpg">
-<div class="food_word">
-<img class="thumbnails" src="images/Drink_1.jpg" alt="drink photo"></a>
-<h3>Orange Juice<br>
-<br>
-RM 7.50<br>
-<br>
-Remark: -
-</h3>
-</div>
-
-
-
-<a target="_blank" href="images/Drink_2.jpg">
-<div class="food_word">
-<img class="thumbnails" src="images/Drink_2.jpg" alt="drink photo"></a>
-<h3>Soursop Juice<br>
-<br>
-RM 10.50<br>
-<br>
-Remark: -
-</h3>
-</div>
 
 <div class="border_shipping">
 <div class="option">
 <label for="Delivery Time">Delivery Time</label>
 <hr></hr>
-
 <?php include('../Leonard/calculatetimendate.php')?>
 </div>
 </div>
@@ -196,8 +167,8 @@ Remark: -
     
     <hr></hr>
     <div class="order_text">
-    <p>Total Order (5 itmes): 
-    <h5>RM 75.40</h5>
+    <p>Total Order (<?php echo $count?> items): 
+    <h5>RM<?php echo $fortotal?></h5>
     </p>
     </div>
 
@@ -208,7 +179,7 @@ Remark: -
     
     <div class="payment_method"> 
         <select name="payment" id="payment">
-            <option value=""></option>
+            <option selected disabled hidden value="">Select a payment method</option>
             <option value="Cash on Delivery">Cash on Delivery</option>
             <option value="Credit Card">Credit Card</option>
         </select>
@@ -222,11 +193,14 @@ Remark: -
     Shipping Subtotal:
     <br>
     Total Payment:
-    <h6>RM75.40
+    <h6>RM<?php echo$fortotal?>
     <br>
-    RM10.00
-    <br>
-    RM85.40
+    RM<?php $shipfee = number_format(10, 2);
+    echo $shipfee?>
+    <br>RM<?php
+    $realtotal = $fortotal + $shipfee;
+    echo number_format($realtotal, 2);
+    ?>
     </h6> 
     </p>
     </div>

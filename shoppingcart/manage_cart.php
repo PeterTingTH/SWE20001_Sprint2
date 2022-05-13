@@ -29,7 +29,8 @@ $sql = "CREATE TABLE IF NOT EXISTS ITEMCART(
 	item_name VARCHAR(25) NOT NULL,
 	item_img VARCHAR(25) NOT NULL,
 	price double(10,2) NOT NULL,
-	quantity INT(10) DEFAULT 1
+	quantity INT(10) DEFAULT 1,
+    subtotal double(10,2) DEFAULT 0
 )"; 
 
 
@@ -70,9 +71,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 $itemname = $_POST['Item_Name'];
                 $price = $_POST['Price'];
                 $quantity = $_POST['Quantity'];
+                $subtotal = $_POST['Subtotal'];
                 $count=count($_SESSION['cart']);
-                $_SESSION['cart'][$count]=array('Item_Img'=>$_POST['Item_Img'],'Item_Name'=>$_POST['Item_Name'],'Price'=>$_POST['Price'],'Quantity'=>1);
-                $query = "INSERT INTO itemcart(item_name,item_img,price,quantity) VALUES ('$itemname','$itemimg','$price','$quantity')";
+                $_SESSION['cart'][$count]=array('Item_Img'=>$_POST['Item_Img'],'Item_Name'=>$_POST['Item_Name'],'Price'=>$_POST['Price'],'Quantity'=>1,'Subtotal'=>$_POST['Subtotal']);
+                $query = "INSERT INTO itemcart(item_name,item_img,price,quantity,subtotal) VALUES ('$itemname','$itemimg','$price','$quantity','$subtotal')";
                 mysqli_query($conn,$query);		
                 echo"
                 <script>
@@ -89,8 +91,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             $itemname = $_POST['Item_Name'];
             $price = $_POST['Price'];
              $quantity = $_POST['Quantity'];
-            $_SESSION['cart'][0]=array('Item_Img'=>$_POST['Item_Img'],'Item_Name'=>$_POST['Item_Name'],'Price'=>$_POST['Price'],'Quantity'=>1);       
-            $query = "INSERT INTO itemcart(item_name,item_img,price,quantity) VALUES ('$itemname','$itemimg','$price','$quantity')";
+             $subtotal = $_POST['Subtotal'];
+            $_SESSION['cart'][0]=array('Item_Img'=>$_POST['Item_Img'],'Item_Name'=>$_POST['Item_Name'],'Price'=>$_POST['Price'],'Quantity'=>1,'Subtotal'=>$_POST['Subtotal']);       
+            $query = "INSERT INTO itemcart(item_name,item_img,price,quantity,subtotal) VALUES ('$itemname','$itemimg','$price','$quantity','$subtotal')";
             mysqli_query($conn,$query);	
             echo"<script>
                  alert('Item Added');
@@ -117,5 +120,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             }
         }
     }
-    
+
+
 }

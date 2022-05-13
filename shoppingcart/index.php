@@ -31,8 +31,10 @@ include("nav.php");
                                         <button type='submit' href="#popup1" name='Add_To_Cart' class='btn btn_info'>Add to Cart </button>
                                         <input type='hidden' name='Item_Img' value='images/apple.png' />
                                         <input type='hidden' name='Item_Name' value='Apple Juice' />
-                                        <input type='hidden' name='Price' value='10' />
-                                        <input type='hidden' name='Quantity' value='1' />
+                                        <input type='hidden' name='Price' value='10.00' />
+                                        <input type='hidden' name='Quantity' value='0' />
+                                        <input type='hidden' name='Subtotal' value='10.00' />
+                    
                             </div>
                             
                         </form>
@@ -49,8 +51,10 @@ include("nav.php");
                                         <button type='submit' name='Add_To_Cart' class='btn btn_info'>Add to Cart </button>
                                         <input type='hidden' name='Item_Img' value='images/grapes.png' />
                                         <input type='hidden' name='Item_Name' value='Grape Juice' />
-                                        <input type='hidden' name='Price' value='9' />
-                                        <input type='hidden' name='Quantity' value='1' />
+                                        <input type='hidden' name='Price' value='9.00' />
+                                        <input type='hidden' name='Quantity' value='0' />
+                                        <input type='hidden' name='Subtotal' value='9.00' />
+                                    
                                 
                             </div>
                         </form>
