@@ -20,7 +20,7 @@
             - Display it in a different page
             - That's it!
         */
-            require "conn.php";
+            require_once "inc/connect.php";
             if(isset($_POST['submit-search'])){
 
                 $s_input = mysqli_real_escape_string($conn, $_POST['search-input']);
@@ -35,7 +35,7 @@
                     }
                 } else {
                     echo "<script>alert('There are no results matching your search!');
-                    window. location. href='http://localhost/allan/search-button/';</script>";
+                    window. location. href='http://localhost/allan/pendingorders.php';</script>";
                 }
             }
         ?>

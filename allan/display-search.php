@@ -9,15 +9,14 @@
     <body>
         <div class="search-class">
             <form action="search.php" method="POST">
-                <img src="search.png" alt="search image">
+                <img src="images/search.png" alt="search image">
                 <input type="text" name="search-input" class="search-input">
                 <button type="submit" name="submit-search" class="submit-search">Search</button>
             </form>
         </div>
         <div class="article-container">
             <?php
-                require "conn.php";
-
+                require_once "inc/connect.php";
                 $select = "SELECT * FROM search";
                 $query = mysqli_query($conn, $select);
             ?>

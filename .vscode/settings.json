@@ -1,3 +1,5 @@
 {
-    "editor.fontFamily": "MonoLisa"
+    "editor.fontFamily": "Dina",
+    "workbench.colorTheme": "One Dark Darker",
+    "editor.fontSize": 16
 }

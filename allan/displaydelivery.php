@@ -13,8 +13,8 @@
     </head>
     <body>
         <?php
-            include 'connect.php';
-            $db = $con;
+            require_once "inc/connect.php";
+            $db = $conn;
             $table = "delivery";
             $columns = [`order_id`, `deliveryAddress`, `deliveryTime`, `deliveryStatus`, `deliveryId`];
             $fetchData = fetch_data($db, $table, $columns);

@@ -32,7 +32,7 @@
             <!--<input type="reset" name="reset" value="Clear Form">-->
         </form>
         <?php
-            include 'functions.php';
+            require 'inc/functions.php';
             $ins = insertorder();
         ?>
     </div>
