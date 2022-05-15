@@ -111,8 +111,11 @@ function createTableFood($conn){
     $sql = "CREATE TABLE IF NOT EXISTS fooddata (
         foodID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
         foodName VARCHAR(25) NOT NULL,
-        foodImg VARCHAR(25) NOT NULL,
-        foodPrice DECIMAL(10,2) NOT NULL
+        foodCategory VARCHAR(25) NOT NULL,
+        foodCuisine VARCHAR(25) NOT NULL,
+        foodImg VARCHAR(255) NOT NULL,
+        foodPrice DECIMAL(10,2) NOT NULL,
+        foodCreated TIMESTAMP
     )";
     
     mysqli_query($conn, $sql);
@@ -146,9 +149,7 @@ function createTableOrders($conn){
         orderDate DATETIME NOT NULL,
         orderReceived DATETIME,
         orderStatus VARCHAR(20) NOT NULL DEFAULT \"Pending\",
-        PRIMARY KEY (orderID,foodID),
-        FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
-        FOREIGN KEY (custID) REFERENCES custdata(custID)
+        PRIMARY KEY (orderID,foodID)
     )";
     
     mysqli_query($conn, $sql);
