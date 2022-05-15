@@ -1,0 +1,864 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html{
+	scroll-behavior: smooth;
+}
+
+/*Body*/
+body{
+    background-color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+/*Navigation Settings*/
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #333;
+}
+
+.logo{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.logo a{
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    position: relative;
+}
+
+.nav-links a{
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.nav-links a:hover{
+    background-color: #111;
+}
+
+#sign_up_page .position_signup, #login_page .position_login, #profile_page .position_profile, #shopping_cart_page .position_cart{
+    background-color: #111;
+}
+
+/*Sign Up, Login, Verification Key, Forget Password*/
+.form_body {
+	background: #f6f5f7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	min-height: 92vh;
+}
+
+.container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 700px;
+	max-width: 100%;
+	height: 550px;
+}
+
+.form-container button {
+	border-radius: 20px;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+    margin: 8px;
+	cursor: pointer;
+}
+
+.form-container button:active {
+	transform: scale(0.95);
+}
+
+.form-container button:focus {
+	outline: none;
+}
+
+.form-container form, .form-container .msg{
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+.form-container input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+.input_profImg{
+	width: 100%;
+	font-size: 13px;
+}
+
+.form-container input[type=radio] {
+	width: 3%;
+}
+
+.error_section{
+	border:1px solid red !important;
+}
+
+.form-container h2 {
+    margin: 8px;
+}
+
+.error_msg{
+	font-size: 13px;
+}
+
+.forget_pass{
+	text-decoration: underline;
+	color: #000000;
+	font-size: 13px;
+	margin-bottom: 8px;
+}
+
+.overlay-panel {
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+    color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	top: 0;
+}
+
+.overlay-container h1 {
+	font-weight: bold;
+}
+
+.overlay-container p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px;
+}
+
+.switch_login_signup{
+    padding: 10px 20px;
+	background-color: transparent;
+    border: 2px solid #FFF;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+#sign_up_page .form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+    left: 50%;
+	width: 50%;
+}
+
+#sign_up_page .overlay-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#sign_up_page .overlay-panel, #sign_up_page .form-container button{
+	background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
+}
+
+#login_page .form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+    left: 0;
+	width: 50%;
+}
+
+#login_page .overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#login_page .overlay-panel, #login_page .form-container button{
+	background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
+}
+
+.one_column_form .container{
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 450px;
+	max-width: 100%;
+	height: 550px;
+}
+
+.one_column_form .form-container{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.one_column_form .form-container h2, .one_column_form .form-container input, .one_column_form .form-container button{
+	margin: 10px;
+}
+
+.one_column_form .form-container button{
+	background-color: #333;
+}
+
+.one_column_sign{
+	width: 175px;
+}
+
+.one_column_sign img{
+	width: 100%;
+}
+
+#profImgForm{
+	display: none;
+}
+/*Profile*/
+.profile_background{
+	background-color: #000000;
+	width:100%;
+	height:200px;
+	background-image: url(../images/profileBackground.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.profile_information{
+	width: 50%;
+	text-align: center;
+	margin:auto;
+	margin-top: -75px;
+}
+
+.profile_pic{
+	border-radius: 500px;
+	width: 125px;
+	height: 125px;
+}
+
+.custDataTable{
+	width: 50%;
+	margin:auto;
+	padding: 10px;
+}
+
+.custDataTable td{
+	padding: 5px;
+}
+
+.profile_button a{
+	display: inline-block;
+	padding:10px;
+	margin: 20px;
+	text-decoration: none;
+	background-color: #333;
+	color: white;
+	border-radius: 25px;
+}
+
+.proceedMembershipPage{
+	text-decoration: underline;
+	color: #2c3e50;
+	font-size: 17px;
+	padding: 3px;
+}
+
+/* Membership Page */
+.membership_page_button a{
+	display: inline-block;
+	padding:12px 45px;
+	margin: 10px;
+	text-decoration: none;
+	background-color: #333;
+	color: white;
+	border-radius: 25px;
+	cursor: pointer;
+}
+
+/* Apply Membership Page */
+.membership_background{
+	width:100%;
+	height:300px;
+	background-image: url(../images/membershipBackground.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.membership_background_txt{
+	margin:auto;
+	width: 80%;
+	padding-top: 110px;
+}
+
+.membership_background_title{
+	padding-bottom: 10px;
+}
+
+.membership_background_description{
+	font-size: 18px;
+}
+
+.membership_information{
+	padding-top: 25px;
+	width: 80%;
+	margin:auto;
+}
+
+.membership_benefit{
+	padding-top: 20px;
+	width:60%;
+	height: 150px;
+}
+
+.membership_benefit_description{
+	width: 55%;
+	float: left;
+}
+
+.membership_benefit_description p{
+	font-size: 17px;
+}
+
+
+.membership_benefit_img{
+	float: right;
+	width: 150px;
+}
+
+.membership_benefit_img img{
+	width: 100%;
+}
+
+.apply_membership_button{
+	width: 50%;
+	text-align: center;
+	margin:auto;
+}
+
+.apply_membership_button a{
+	display: inline-block;
+	padding:12px 45px;
+	margin-bottom: 15px;
+	text-decoration: none;
+	background-color: #333;
+	color: white;
+	border-radius: 25px;
+	cursor: pointer;
+}
+
+.info_text{
+	text-align: center;
+	margin:30px;
+}
+
+#membership_plan_options{
+	width: 50%;
+	margin: auto;
+	padding: 5px;
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	display: none;
+}
+
+#membership_plan_options button{
+	border: none;
+	border-radius: 25px;
+	color: #FFFFFF;
+	padding: 12px 45px;
+	background-color: #333;
+	text-align: center;
+	cursor: pointer;
+}
+
+.membership_plan_option{
+	padding: 30px;
+	margin: 15px;
+	border: 1px dotted black;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.membership_plan_option_title{
+	font-weight: bold;
+}
+
+.membership_plan_option_small{
+	font-size: 14px;
+}
+
+.membership_plan_subscribe{
+	width: 200px;
+	margin: auto;
+}
+
+.membership_plan_option input[type="radio"]{
+	display: none;
+}
+
+/* Checkout Page */
+.checkoutSection {
+	background-image: url(../images/checkoutBackground.jpg);
+    background-attachment:fixed;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    margin:2%;
+    padding:2%;
+}
+
+.checkoutSection h1{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 45px;
+}
+
+.checkoutSection h2{
+    text-align: left;
+    font-size: 20px;
+}
+
+.checkoutSection h3{
+    text-align: left;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: auto;
+}
+
+.checkoutSection .address_word{
+    display:flex;
+}
+
+.checkoutSection .address_sign{
+    margin-left: auto;
+}
+
+.checkoutSection hr{ 
+    display: block; 
+    overflow: hidden; 
+    border-style: inset; 
+    border-width: 2px;
+}
+
+.checkoutSection .thumbnails {
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    padding: 3px; 
+    max-width: 130%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+    
+.checkoutSection .thumbnails img{
+	width: 100%;
+	margin:auto;
+}
+
+.checkoutSection .thumbnails:hover{
+	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+  
+.checkoutSection .food_word{
+    display: flex;
+    flex-direction: row;
+}
+
+.checkoutSection .selection_address{
+	border-style: groove;
+    width: auto;
+    height: 600px;
+}
+
+.checkoutSection h4{
+    color: crimson;
+    margin-top: 78px;
+    margin-left: 20px;
+}
+
+.checkoutSection label{
+    margin-bottom: 10px;
+    display: block;
+}
+
+.checkoutSection input[type=text] {
+    width: 96%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.checkoutSection select{
+    width: auto;
+    height: auto;
+}
+
+.checkoutSection a{
+    text-decoration: none;
+    color: black;
+}
+
+.checkoutSection a:hover{
+    text-decoration: none;
+    font-weight: none;
+    color: darkorange;
+}
+
+
+.checkoutSection .border_shipping{
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.checkoutSection .option{
+    margin-top: 10px;
+}
+
+.checkoutSection .message{
+    margin-top: 2px;
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.checkoutSection input[type=text1] {
+    width: 96%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.checkoutSection .order_text{
+    display:flex;
+}
+
+.checkoutSection h5{
+    color: crimson;
+    margin-left: auto;
+    font-size: medium; 
+    margin-top: 15px;  
+}
+
+.checkoutSection .paymentOption{
+    margin-top: 2px;
+    background-color: #f2f2f2;
+    padding: 5px 20px 2px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    display: flex;
+}
+
+.checkoutSection .payment_method{
+    margin-left: auto;
+    margin-top: 14px;
+}
+
+.checkoutSection .merchandise{
+    display: flex;
+}
+
+.checkoutSection .summary{
+    margin-top: 2px;
+    background-color: #f2f2f2;
+    padding: 5px 20px 2px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    
+}
+
+.checkoutSection h6{
+    color: crimson;
+    margin-left: auto;
+    font-size: medium; 
+    margin-top: 12px;  
+}
+
+.checkoutButtons{
+	width: 250px;
+	display: block;
+	margin: auto;
+}
+
+.checkoutSection .btn_checkout{
+    border: none;
+    background-color:rgb(197, 238, 238);
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display:inline-block;
+}
+
+.checkoutSection .btn_checkout:hover{
+    background: darkorange;
+}
+
+/* Shopping Cart Page */
+#shopping_cart_page body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#shopping_cart_page .shopping-cart {
+    width: 1000px;
+    height: auto;
+    margin: 80px auto;
+    background-image: linear-gradient(66deg, #000000 0%, #320e10 90%);
+    box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.10);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    
+}
+
+#shopping_cart_page .title {
+    height: 80px;
+    display: flex;
+    padding: 20px 30px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 3px;
+}
+
+#shopping_cart_page .heading {
+     text-align: center;
+    font-size: 35pxx;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#shopping_cart_page .item {
+    flex: 0 0 20%;
+    padding: 30px 10px 20px 30px;
+    width: auto;
+    height: 170px;
+    display: flex;
+    color:white;
+    
+}
+
+#shopping_cart_page .Item_Img {
+    height: 150px;
+	width: 150px;
+}
+
+#shopping_cart_page .btns {
+    position: relative;
+    padding-top: 70px;
+    margin-right: 60px;
+    text-align: center;
+}
+
+#shopping_cart_page .delete-btn {
+    display: inline-block;
+    Cursor: pointer;
+    width: 40px;
+    height: 40px;
+    color: red;
+    text-align: center;
+}
+
+#shopping_cart_page .delete-btn:hover {
+    color: black;
+}
+
+#shopping_cart_page .is-active {
+    animation-name: animate;
+    animation-duration: .8s;
+    animation-iteration-count: 1;
+    animation-timing-function: steps(28);
+    animation-fill-mode: forwards;
+}
+
+#shopping_cart_page .image {
+    padding: 5px;
+    margin-right: 50px;
+    text-align: center;
+    background-color: rgb(72, 69, 69);
+    border:3px solid black;
+
+}
+
+#shopping_cart_page .description {
+    padding-top: 70px;
+    margin-right: 60px;
+    width: 200px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#shopping_cart_page .description h1 {
+    display: block;
+    font-size: 30px;
+    color: white;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 3px;
+}
+
+#shopping_cart_page .description span:first-child {
+    margin-bottom: 5px;
+}
+
+#shopping_cart_page .quantity{
+    padding-top: 70px;
+    margin-left: 60px;
+}
+
+#shopping_cart_page .price {
+    width: 83px;
+    padding-top: 75px;
+    margin-left: 10%;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#shopping_cart_page input[type=number] {
+    height: 40px;
+    line-height: 30px;
+    font-size: 20px;
+    padding: 0 8px;
+}
+
+#shopping_cart_page input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+    cursor: pointer;
+    display: block;
+    width: 8px;
+    color: #333;
+    text-align: center;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    padding: 7px;
+    left: 5px;
+    position: relative;
+    border-radius: 28px;
+}
+
+/*Button*/
+#shopping_cart_page .Proceed {
+    float: right;
+    margin-right: 10%;
+    margin-bottom: 2%;
+    align-items: center;
+    appearance: none;
+    border: 2px solid #FFF;
+    background-color: transparent;
+    background-size: calc(100% + 20px) calc(100% + 20px);
+    border-radius: 100px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+    font-size: 20px;
+    height: auto;
+    justify-content: center;
+    line-height: 2;
+    padding: 6px 30px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+#shopping_cart_page .Proceed:active,
+#shopping_cart_page .Proceed:focus {
+    outline: none;
+}
+
+#shopping_cart_page .Proceed:hover {
+    background-color: #111;
+    opacity: 0.7;
+    
+}
+/*Shopping Cart Empty Heading*/
+#shopping_cart_page .emptycart {
+    font-size: 50px;
+    opacity: 0.5;
+    text-align: center;
+    padding-top: 7%;
+    padding-bottom: 10%;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 3px;
+}
+
+/* Test */
+.testFoodMenu{
+    height:150px;
+    width:150px;
+}
