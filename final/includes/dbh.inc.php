@@ -155,7 +155,7 @@ function createTableOrders($conn){
 }
 
 function createTableCustCancelOrders($conn){
-    $sql = "CREATE TABLE IF NOT EXISTS custcancelledorders (
+    $sql = "CREATE TABLE IF NOT EXISTS custcancelorders (
         orderID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
         foodID INT(11) UNSIGNED NOT NULL,
         custID INT(11) UNSIGNED NOT NULL,
@@ -165,6 +165,8 @@ function createTableCustCancelOrders($conn){
         paymentType VARCHAR(20) NOT NULL,
         orderMsg VARCHAR(200),
         orderDate DATETIME NOT NULL,
+        orderReceived DATETIME,
+        orderStatus VARCHAR(20) NOT NULL DEFAULT \"Pending\",
         PRIMARY KEY (orderID,foodID),
         FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
         FOREIGN KEY (custID) REFERENCES custdata(custID)

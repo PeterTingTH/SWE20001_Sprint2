@@ -893,3 +893,33 @@ nav{
 .submit-search:hover {
     opacity: 1;
 }
+
+.orders {
+    padding: 5%;
+    text-align: center;
+}
+
+.orders-table {
+    width: 100%;
+}
+
+.orders-table th, td{
+    border-collapse: collapse;
+    padding: 8px;
+}
+
+.orders-table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.orders-table tr:hover {
+    background-color: #ddd;
+}
+
+.orders-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #2b2c2b;
+    color: white;
+}
