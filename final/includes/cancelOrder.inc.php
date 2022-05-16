@@ -19,13 +19,14 @@
     $diffhour = ($ordertime->diff($currenttime)->format("%h"));
 
     //echo $diff2;
-    if ($diffyear == 0 && $diffmonth ==0 && $diffday ==0 && $diffhour < 1){
+    if ($diffyear == 0 && $diffmonth == 0 && $diffday == 0 && $diffhour <= 1){
         $ordupd = "UPDATE custorders SET orderStatus='Cancelled' WHERE orderID=$orderid";
         if(mysqli_query($conn, $ordupd)){
-            echo "<script>alert('Order cancelled successfully');</script>";
+            echo "<script>alert('Order cancelled successfully')</script>";
         }
     }else {
-        echo "<script>alert('You cannot cancel as your time limit has already passed (1 hour).');</script>";
+        echo "<script>alert('You cannot cancel as your time limit has already passed (1 hour).')</script>";
     }
+    mysqli_close($conn);
     echo "<meta http-equiv='refresh' content='0;../order.php' />";
 ?>

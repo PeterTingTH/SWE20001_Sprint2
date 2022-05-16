@@ -145,7 +145,7 @@ function createTableOrders($conn){
         orderMsg VARCHAR(200),
         orderDate DATETIME NOT NULL,
         orderReceived DATETIME,
-        orderStatus VARCHAR(20) NOT NULL DEFAULT \"Pending\",
+        orderStatus VARCHAR(20) NOT NULL DEFAULT \"InProgress\",
         PRIMARY KEY (orderID,foodID),
         FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
         FOREIGN KEY (custID) REFERENCES custdata(custID)

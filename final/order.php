@@ -42,8 +42,8 @@ if(!isset($_SESSION['custid'])){
             <?php
                 $osql = "SELECT * FROM custorders WHERE custID = $loggedID";
                 $oquery = mysqli_query($conn, $osql);
-                while ($ofetch = mysqli_fetch_array($oquery)) {  
-                    $ids = $ofetch['orderID'];                  
+                while ($ofetch = mysqli_fetch_array($oquery)) { 
+                    $ids = $ofetch['orderID'];                 
             ?>
             <tr>
                 <td><?php echo $ids; ?></td>
@@ -53,14 +53,13 @@ if(!isset($_SESSION['custid'])){
                 <td><?php echo $ofetch['paymentType']; ?></td>
                 <td><?php echo $ofetch['orderDate']; ?></td>
                 <td><?php echo $ofetch['orderStatus']; ?></td>
-                <td><?php if ($ofetch['orderStatus'] == "Pending") { ?><button class="open-btn" onclick="openForm()">Cancel</button> <?php }?></td>
+                <td><?php if ($ofetch['orderStatus'] == "InProgress") { ?><button class="open-btn" onclick="openForm()">Cancel</button> <?php }?></td>
                 <div class="cancel-popup" id="cancelForm">
                     <form action="cancel.php" class="cancel-container">
                         <div id="cancelForm-content">
-                            <h3>Reason for cancellation</h3>
-                            <input type="text" name="reason" placeholder="Enter here.." required>
+                            <input type="text" name="reason" placeholder="Reason for cancellation" required><br><br>
                             <button type="submit" class="cancel-btn"><?php echo "<a href='includes/cancelOrder.inc.php?order_id=".$ofetch['orderID']."&deliveryTime=".$ofetch['orderDate']."'>Continue</a></div>";?></button>
-                            <button type="button" class="close-btn" onclick="closeForm()">X</button>
+                            <span class="close-btn" onclick="closeForm()">×</span>
                         </div>
                     </form>
                 </div>
@@ -68,6 +67,15 @@ if(!isset($_SESSION['custid'])){
             <?php }?>
         </tbody>
     </table>
+    <script>
+        function openForm() {
+        document.getElementById("cancelForm").style.display = "block";
+        }
+
+        function closeForm() {
+        document.getElementById("cancelForm").style.display = "none";
+        }
+    </script>
 </div>
 </div>
 </body>
