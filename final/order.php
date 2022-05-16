@@ -49,9 +49,7 @@
                         <td><?php echo $ofetch['orderAddress']; ?></td>
                         <td><?php echo $ofetch['paymentType']; ?></td>
                         <td><?php echo $ofetch['orderDate']; ?></td>
-                        <td>
-                            <?php echo "<a href='viewOrder.php?id=".$ofetch['orderID']."'>View</a>"; ?>
-                        </td>
+                        <td><?php echo "<a href='viewOrder.php?id=".$ofetch['orderID']."'>View</a>"; ?></td>
                         <td>
 							<?php if($ofetch['orderStatus'] == 'Pending'){
 							    echo "<a href='cancelOrder.php?id=".$ofetch['orderID'].">Cancel</a>";
