@@ -12,6 +12,12 @@
 
 <body>
     <?php include 'navigation.php';?>
+    <div class="search-class" style="padding: 20px;">
+        <form action="search.php" method="POST">
+            <input type="text" name="search-input" class="search-input" placeholder="Search food">
+            <button type="submit" name="submit-search" class="submit-search">Search</button>
+        </form>
+    </div>
     <?php
         if (isset($_SESSION['adminid'])){
             header("location: admin.php");
