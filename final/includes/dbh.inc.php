@@ -29,9 +29,14 @@ function createTableCust($conn){
 
 function createTableCustAddress($conn){
     $sql = "CREATE TABLE IF NOT EXISTS custaddress (
-        custID INT(11) UNSIGNED NOT NULL PRIMARY KEY, 
-        custAddress VARCHAR(50) NOT NULL,
-        FOREIGN KEY (custID) REFERENCES custdata(custID) ON DELETE CASCADE
+        id INT(11) UNSIGNED NOT NULL PRIMARY KEY, 
+        address VARCHAR(225) NOT NULL,
+        phoneum INT(11) UNSIGNED NOT NULL,
+        state VARCHAR(20) UNSIGNED NOT NULL,
+        postcode INT(5) UNSIGNED NOT NULL,
+        street VARCHAR(40) UNSIGNED NOT NULL,
+        choose_address VARCHAR(30),
+        FOREIGN KEY (id) REFERENCES custdata(custID) ON DELETE CASCADE
     )";
     
     mysqli_query($conn, $sql);
