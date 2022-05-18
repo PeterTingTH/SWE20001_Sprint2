@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 if (isset($_POST['modquantity'])){
 
     require_once 'dbh.inc.php';
@@ -22,7 +24,7 @@ if (isset($_POST['modquantity'])){
     header("location: ../mycart.php");
     exit();
 
-} else if(isset($_POST['remove_Item'])){
+}else if(isset($_POST['remove_Item'])){
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
@@ -37,7 +39,9 @@ if (isset($_POST['modquantity'])){
     header("location: ../mycart.php");
     exit();
 
-} else if(isset($_POST['addFoodMenuToCart'])){
+} 
+
+else if(isset($_POST['addFoodMenuToCart'])){
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
@@ -59,7 +63,6 @@ if (isset($_POST['modquantity'])){
         $initialQuantity = 1;
         $foodExists = foodExists($conn,$add_Item_ID);
         $foodPrice = $foodExists["foodPrice"];
-
         $sql = "INSERT INTO custcart (foodID, custID, quantity, subtotal) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -68,7 +71,7 @@ if (isset($_POST['modquantity'])){
             exit();
         }
 
-        mysqli_stmt_bind_param($stmt, "ssss", $add_Item_ID, $loggedID, $initialQuantity, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $add_Item_ID, $loggedID,  $initialQuantity, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
@@ -87,6 +90,8 @@ if (isset($_POST['modquantity'])){
             $initialQuantity = 1;
             $foodExists = foodExists($conn,$add_Item_ID);
             $foodPrice = $foodExists["foodPrice"];
+       
+                  
             
             $sql = "INSERT INTO custcart (cartID, foodID, custID, quantity, subtotal) VALUES (?, ?, ?, ?, ?);";
             $stmt = mysqli_stmt_init($conn);
@@ -99,7 +104,14 @@ if (isset($_POST['modquantity'])){
             mysqli_stmt_bind_param($stmt, "sssss", $foundCartID, $add_Item_ID, $loggedID, $initialQuantity, $foodPrice);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);   
-        } else {
+        }else if (isset($_POST['foodtype'])){
+            $foodExists = foodExists($conn,$add_Item_ID);
+            $foodtype = $foodExists["foodtype"];
+
+            $query = "UPDATE custcart SET foodtype = '$foodtype' WHERE foodID = '$add_Item_ID' AND custID = '$loggedID';";
+            $result = mysqli_query($conn,$query);
+        } 
+        else {
             $foodExists = foodExists($conn,$add_Item_ID);
             $foodPrice = $foodExists["foodPrice"];
 

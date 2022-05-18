@@ -14,23 +14,8 @@ if (isset($_POST["checkoutCart"])){
     $loggedID = $_SESSION['custid'];
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $testAddress = "lol";
-    $deliverTime;
-    //if(hotfood){if($time == "Now"){
-        //$deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 50 minutes') );
-    //} else if ($time == "Nxt1Hour") {
-        //$deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 1 hour 50 minutes'));
-    //} else if ($time == "Nxt2Hour") {
-        //$deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour 50 minutes'));
-    //} 
-    //}else if (coldfood){
-    if($time == "Now"){
-        $deliverTime = date('Y-m-d H:i:s',strtotime($memberExpire . '+ 20 minutes'));
-    } else if ($time == "Nxt1Hour") {
-        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 1 hour 20 minutes'));
-    } else if ($time == "Nxt2Hour") {
-        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour 20 minutes'));
-    }
-    //}
+
+    
 
     $items = 0;
     $last_id = 0;
@@ -51,7 +36,7 @@ if (isset($_POST["checkoutCart"])){
                 exit();
             }
     
-            mysqli_stmt_bind_param($stmt, "ssssssss", $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $deliverTime);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $time);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             
@@ -66,7 +51,7 @@ if (isset($_POST["checkoutCart"])){
                 exit();
             }
     
-            mysqli_stmt_bind_param($stmt, "sssssssss", $last_id, $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $deliverTime);
+            mysqli_stmt_bind_param($stmt, "sssssssss", $last_id, $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $time);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
         }

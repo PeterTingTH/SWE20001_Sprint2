@@ -131,51 +131,84 @@
 
             <?php
                 $qry = mysqli_query($conn, "SELECT * FROM custcart WHERE custid = $loggedID");
-
+                $now = date('Y-m-d H:i:s');
+                $onow = date('Y-m-d H:i:s',strtotime('+ 1 hour'));
+                $two = date('Y-m-d H:i:s', strtotime('+ 20 minutes'));
+                $five = date('Y-m-d H:i:s', strtotime('+ 50 minutes'));
+                $tnow = date('Y-m-d H:i:s',strtotime('+ 2 hour'));
+                $otwo = date('Y-m-d H:i:s', strtotime('+ 1 hour 20 minutes'));
+                $ofive = date('Y-m-d H:i:s', strtotime('+ 1 hour 50 minutes'));
+                $ttwo = date('Y-m-d H:i:s', strtotime('+ 2 hour 20 minutes'));
+                $tfive = date('Y-m-d H:i:s', strtotime('+ 2 hour 50 minutes'));
                 $orderTotal = 0;
-
+                $checkwarm = false;
+                $starthour = "07:00";
+                $closehour = "23:00";
                 while($result = mysqli_fetch_assoc($qry)){
                     $food_ID = $result["foodID"];
                     $quantity = $result["quantity"];
                     $subtotal = $result["subtotal"];
-
                     $orderTotal += $subtotal;
+
 
                     $foodExists = foodExists($conn,$food_ID);
                     $foodName = $foodExists["foodName"];
                     $foodImg = $foodExists["foodImg"];
                     $foodPrice = $foodExists["foodPrice"];
-
+                    $foodCategory = $foodExists["foodCategory"];
+                    if ($foodCategory == 'warm'){
+                        $checkwarm = true;
+                    }
                     echo "
                     <div class=\"food_word\">
                         <img class=\"thumbnails\" src=\"$foodImg\" alt=\"food photo\">
                         <h3>
-                            Name: $foodName
                             <br>
-                            Quantity: $quantity
                             <br>
-                            Price: $subtotal
+                            <p class='checkpara'>Name: $foodName</p>
+                            <br>
+                            <br>
+                            <p class='checkpara'>Quantity: $quantity</p>
+                            <br>
+                            <br>
+                            <p class='checkpara'>Price per item: $foodPrice</p>
+                            <br>
+                            <br>
+                            <p class='checkpara'>Subtotal: RM $subtotal</p>
                             <br>
                             <br>
                         </h3>
                     </div>
                     ";
                 }
-            ?>
-            
-            <div class="border_shipping">
-                <div class="option">
+                ?>
+            <div class='border_shipping'>
+                <div class='option'>
                     <label>Delivery Time</label>
                     <hr></hr>
-                    <p>Options: 
-                        <select name="time">
-                            <option value="Now" selected>Now</option>
-                            <option value="Nxt1Hour">Next 1 hour</option>
-                            <option value="Nxt2Hour">Next 2 hour</option>
-                        </select>
+                    <p>Options:
+                        <?php
+                        if($checkwarm == true){
+                            echo"<select name='time'>
+                            <option value='$five' selected>Now ($now - $five)</option>
+                            <option value='$ofive'>Next 1 hour ($onow - $ofive)</option>
+                            <option value='$tfive'>Next 2 hour ($tnow - $tfive)</option>
+                            </select>";
+                            }
+                        else{
+                            echo"<select name='time'>
+                            <option value='$two' selected>Now ($now - $two)</option>
+                            <option value='$otwo'>Next 1 hour ($onow - $otwo)</option>
+                            <option value='$ttwo'>Next 2 hour ($tnow - $ttwo)</option>
+                            </select>";
+                            }
+                        ?>
+                       
+                        
                     </p>
                 </div>
             </div>
+        
 
             <div class="message">
                 <p>Message:
