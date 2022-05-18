@@ -4,8 +4,8 @@ session_start();
     if(!empty($_POST['field'])) die();
 
     session_start();
-    require_once('Edit.php');
-    require_once('NewAddress.php');
+    require_once('edit.inc.php');
+    require_once('newaddress.inc.php');
 
     $variable1=rand(1,10);
 	  $variable2=rand(1,10);
