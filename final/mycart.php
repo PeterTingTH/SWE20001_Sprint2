@@ -8,6 +8,7 @@
     <meta name="description" content="Shopping Cart" />
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
     <title>Cart</title>
 </head>
 
@@ -51,6 +52,7 @@
                         <div class='description'>
                             <h1>$foodName</h1>
                         </div>
+                        
                         <div class='quantity'>
                             <form action='includes/cart.inc.php' method='POST'>
                                 <input name='modquantity' onchange='this.form.submit();' type='number' value='$quantity' min='1' max='50'>
@@ -58,7 +60,7 @@
                             </form>
                         </div>
                         <div class='price'>
-                            <span>$$subtotal</span>
+                            <span>RM$subtotal</span>
                         </div>
                     </div>
                 ";

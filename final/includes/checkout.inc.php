@@ -14,6 +14,7 @@ if (isset($_POST["checkoutCart"])){
     $loggedID = $_SESSION['custid'];
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $testAddress = "lol";
+<<<<<<< HEAD
     $deliverTime;
     if($time == "Now"){
         $deliverTime = date('Y-m-d H:i:s');
@@ -22,6 +23,10 @@ if (isset($_POST["checkoutCart"])){
     } else if ($time == "Nxt2Hour") {
         $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour'));
     }
+=======
+
+    
+>>>>>>> c9679cb3ff92919fa35027ed9b7a4eccdf3fb0af
 
     $items = 0;
     $last_id = 0;
@@ -42,7 +47,7 @@ if (isset($_POST["checkoutCart"])){
                 exit();
             }
     
-            mysqli_stmt_bind_param($stmt, "ssssssss", $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $deliverTime);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $time);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             
@@ -57,7 +62,7 @@ if (isset($_POST["checkoutCart"])){
                 exit();
             }
     
-            mysqli_stmt_bind_param($stmt, "sssssssss", $last_id, $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $deliverTime);
+            mysqli_stmt_bind_param($stmt, "sssssssss", $last_id, $food_ID, $loggedID, $quantity, $subtotal, $testAddress, $paymentMethod, $orderMsg, $time);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
         }

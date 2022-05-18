@@ -28,13 +28,21 @@
         $qry = mysqli_query($conn, "SELECT * FROM fooddata");
 
         echo "
+<<<<<<< HEAD
         <table class='orders-table'>
+=======
+        <table class='indextable'>
+>>>>>>> c9679cb3ff92919fa35027ed9b7a4eccdf3fb0af
         <tr>
-        <th>Name</th>
-        <th>Image</th>
-        <th>Price</th>
-        <th>Button</th>
-        </tr>
+        <th class='tableheading'>Name</th>
+        <th class='tableheading'>Image</th>
+        <th class='tableheading'>Price</th>";
+        if(isset($_SESSION['custid'])){
+            echo "
+        <th class='tableheading'>Button</th>
+        ";
+        }
+        echo" </tr>
         ";
 
         while($result = mysqli_fetch_assoc($qry)){
@@ -44,14 +52,15 @@
             $foodPrice = $result["foodPrice"];
 
             echo "
-            <tr>
-            <td>$foodName</td>
-            <td><img src='$foodImg' class='testFoodMenu'></td>
-            <td>$$foodPrice</td>";
+            <tr class='tablerow'>
+            <td class='tablein'>$foodName</td>
+            <td class='tablein'><img src='$foodImg' class='testFoodMenu '></td>
+        
+            <td class='tablein'>RM $foodPrice</td>";
 
             if(isset($_SESSION['custid'])){
                 echo "
-                <td>
+                <td class='tablein'>
                     <form action='includes/cart.inc.php' method='POST'>
                         <input type='submit' name='addFoodMenuToCart' value='Add to cart'>
                         <input type='hidden' name='chosenFoodMenu' value='$foodID'>  
