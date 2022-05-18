@@ -14,19 +14,8 @@ if (isset($_POST["checkoutCart"])){
     $loggedID = $_SESSION['custid'];
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $testAddress = "lol";
-<<<<<<< HEAD
-    $deliverTime;
-    if($time == "Now"){
-        $deliverTime = date('Y-m-d H:i:s');
-    } else if ($time == "Nxt1Hour") {
-        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 1 hour'));
-    } else if ($time == "Nxt2Hour") {
-        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour'));
-    }
-=======
 
     
->>>>>>> c9679cb3ff92919fa35027ed9b7a4eccdf3fb0af
 
     $items = 0;
     $last_id = 0;

@@ -28,11 +28,7 @@
         $qry = mysqli_query($conn, "SELECT * FROM fooddata");
 
         echo "
-<<<<<<< HEAD
-        <table class='orders-table'>
-=======
         <table class='indextable'>
->>>>>>> c9679cb3ff92919fa35027ed9b7a4eccdf3fb0af
         <tr>
         <th class='tableheading'>Name</th>
         <th class='tableheading'>Image</th>
