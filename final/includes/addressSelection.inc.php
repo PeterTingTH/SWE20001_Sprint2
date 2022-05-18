@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('Edit.php');
+require_once('NewAddress.php');
 
     if(!empty($_POST['field'])) die();
 
@@ -54,13 +56,13 @@ session_start();
 
         $sql = "CREATE TABLE IF NOT EXISTS selectionlisting(
             id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			      address VARCHAR(255) NOT NULL,
+	    address VARCHAR(255) NOT NULL,
             phonenum INT(11) NOT NULL,
             state VARCHAR(20) NOT NULL,
             postcode INT(5) NOT NULL,
-			      street VARCHAR(40) NOT NULL,
-			      time VARCHAR(20) NOT NULL,
-			      choose_address VARCHAR(30)
+	    street VARCHAR(40) NOT NULL,
+	    time VARCHAR(20) NOT NULL,
+	    choose_address VARCHAR(30)
             )";
 
             mysqli_query($conn, $sql);
