@@ -31,6 +31,7 @@ if(isset($_SESSION['custid'])){
     echo '<ul class="nav-links">';
     echo '<li><a href="profile.php" class="position_profile">Profile</a></li>';
     echo '<li><a href="mycart.php" class="position_cart">Cart</a></li>';
+    echo '<li><a href="order.php" class="position_order">Order</a></li>';
     echo '<li><a href="includes/logout.inc.php">Log Out</a></li>';
     echo '</ul>';
     echo '</nav>';

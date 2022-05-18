@@ -1,32 +1,42 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['custid'])){
-        header("location: ../index.php");
-        exit();
-    }
+session_start();
+
+if(!isset($_SESSION['custid'])){
+    header("location: index.php");
+    exit();
+}
+
+if(isset($_GET) && !empty($_GET)){
+
     require_once 'dbh.inc.php';
-    require_once 'functions.inc.php';
-    $loggedID = $_SESSION["custid"];
     date_default_timezone_set('Asia/Kuala_Lumpur');
 
-    $orderid = $_GET['order_id'];
+    $loggedID = $_SESSION["custid"];
+    $fetched = $_GET['id'];
+
     $currenttime = new DateTime();
-    $ordertime = new DateTime($_GET['deliveryTime']);
+    $deliverytime = new DateTime($_GET['time']);
 
-    $diffyear = ($ordertime->diff($currenttime)->format("%y"));
-    $diffmonth = ($ordertime->diff($currenttime)->format("%m"));
-    $diffday = ($ordertime->diff($currenttime)->format("%d"));
-    $diffhour = ($ordertime->diff($currenttime)->format("%h"));
-
-    //echo $diff2;
-    if ($diffyear == 0 && $diffmonth == 0 && $diffday == 0 && $diffhour <= 1){
-        $ordupd = "UPDATE custorders SET orderStatus='Cancelled' WHERE orderID=$orderid";
-        if(mysqli_query($conn, $ordupd)){
-            echo "<script>alert('Order cancelled successfully')</script>";
+    $diffhour = ($deliverytime->diff($currenttime)->format("%h"));
+    //echo $diffhour;
+    if($diffhour < 1){
+        if ($diffhour < 0){
+            $sql = " UPDATE pendingorders SET orderStatus = 'Complete' where orderID = $fetched";
+            mysqli_query($conn, $sql);
         }
-    }else {
-        echo "<script>alert('You cannot cancel as your time limit has already passed (1 hour).')</script>";
+        echo "<script>alert('You cannot cancel as the order will be delivered in less than 1 hour from now.')</script>";
+    } else {
+        if(ctype_digit($fetched)){
+            //echo "<script>alert('Still 1 hour before delivery time')</script>";
+            $sql = " UPDATE pendingorders SET orderStatus = 'Order Cancelled' where orderID = $fetched";
+            if(mysqli_query($conn, $sql)){
+                echo "<script> alert('Your order was cancelled successfully'); </script>";
+            } else {
+                echo "<script> alert('Error updating order status code'); </script>";
+            }
+        }
     }
+
     mysqli_close($conn);
     echo "<meta http-equiv='refresh' content='0;../order.php' />";
-?>
+}

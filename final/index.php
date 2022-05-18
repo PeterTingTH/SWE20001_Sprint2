@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" >
     <meta name="viewport" content="width=ul, initial-scale=1.0" />
     <meta name="author" content="Peter" />
     <meta name="keywords" content="Home" />
@@ -12,7 +12,8 @@
 
 <body>
     <?php include 'navigation.php';?>
-    <div class="search-class" style="padding: 20px;">
+    <h1 style="padding-top: 50px; text-align: center;">Food Menu</h1>
+    <div class="search-class">
         <form action="search.php" method="POST">
             <input type="text" name="search-input" class="search-input" placeholder="Search food">
             <button type="submit" name="submit-search" class="submit-search">Search</button>
@@ -27,7 +28,7 @@
         $qry = mysqli_query($conn, "SELECT * FROM fooddata");
 
         echo "
-        <table>
+        <table class='orders-table'>
         <tr>
         <th>Name</th>
         <th>Image</th>

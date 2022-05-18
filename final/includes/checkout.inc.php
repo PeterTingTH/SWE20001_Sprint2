@@ -15,22 +15,13 @@ if (isset($_POST["checkoutCart"])){
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $testAddress = "lol";
     $deliverTime;
-    //if(hotfood){if($time == "Now"){
-        //$deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 50 minutes') );
-    //} else if ($time == "Nxt1Hour") {
-        //$deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 1 hour 50 minutes'));
-    //} else if ($time == "Nxt2Hour") {
-        //$deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour 50 minutes'));
-    //} 
-    //}else if (coldfood){
     if($time == "Now"){
-        $deliverTime = date('Y-m-d H:i:s',strtotime($memberExpire . '+ 20 minutes'));
+        $deliverTime = date('Y-m-d H:i:s');
     } else if ($time == "Nxt1Hour") {
-        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 1 hour 20 minutes'));
+        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 1 hour'));
     } else if ($time == "Nxt2Hour") {
-        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour 20 minutes'));
+        $deliverTime = date('Y-m-d H:i:s', strtotime($memberExpire . '+ 2 hour'));
     }
-    //}
 
     $items = 0;
     $last_id = 0;
@@ -43,7 +34,7 @@ if (isset($_POST["checkoutCart"])){
         $subtotal = $result["subtotal"];
 
         if($items == 0){
-            $sql = "INSERT INTO custorders (foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO pendingorders (foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)){
                 mysqli_close($conn);
@@ -58,7 +49,7 @@ if (isset($_POST["checkoutCart"])){
             $items += 1;
             $last_id = mysqli_insert_id($conn);
         } else {
-            $sql = "INSERT INTO custorders (orderID, foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO pendingorders (orderID, foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)){
                 mysqli_close($conn);
@@ -76,8 +67,10 @@ if (isset($_POST["checkoutCart"])){
     $query = "DELETE FROM custcart where custID = '$loggedID';";
     $result = mysqli_query($conn,$query);
 
+    
+
     mysqli_close($conn);
-    header("location: ../mycart.php");
+    header("location: ../order.php");
     exit();
 
 } else if (isset($_POST["paymentBack"])){

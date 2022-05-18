@@ -8,74 +8,92 @@
     <title>Orders</title>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
-<?php
-include 'navigation.php';
-if(!isset($_SESSION['custid'])){
-    header("location: index.php");
-    exit();
-}
-?>
-<div class="orders">
-<div class="order-title">
-    <h1 class="title">Your Orders</h1><br>
-</div>
-
-<div class="order-content">
-    <?php 
-        $loggedID = $_SESSION["custid"];
+<body id="order_page">
+    <?php
+        include 'navigation.php';
+        if(!isset($_SESSION['custid'])){
+            header("location: index.php");
+            exit();
+        }
     ?>
-    <table class="orders-table">
-        <thead>
-            <tr>
+    <div class="orders">
+        <div class="order-title">
+            <h1 class="title">Your Orders</h1><br>
+        </div>
+
+        <div class="order-content">
+            <?php 
+                $loggedID = $_SESSION["custid"];
+                $db = $conn;
+                $table = "pendingorders";
+                $columns = [`orderID`, `foodID`, `custID`, `orderQuantity`, `orderPrice`, `orderAddress`, `paymentType`, `orderMsg`, `orderDate`, `orderReceived`, `orderStatus`];
+                $fetchData = fetch_data($db, $table, $columns);
+
+                function fetch_data($db, $table, $columns){
+                if(empty($db)){
+                    $msg= "Database connection error";
+                }elseif (empty($columns) || !is_array($columns)) {
+                    $msg="columns Name must be defined in an indexed array";
+                }elseif(empty($table)){
+                    $msg= "Table is empty";
+                }else{
+                    $columnName = implode(", ", $columns);
+                    $query = "SELECT ".$columnName." FROM $table"." ORDER BY orderID DESC";
+                    $result = $db->query($query);
+
+                    if($result== true){ 
+                    if ($result->num_rows > 0) {
+                        $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        $msg= $row;
+                    } else {
+                        $msg= "No Data Found"; 
+                    }
+                    }else{
+                    $msg= mysqli_error($db);
+                    }
+                }
+                    return $msg;
+                }
+                $q = "SELECT * FROM pendingorders";
+                $result = mysqli_query($db, $q);
+            ?>
+            <table class = "orders-table">
+                <tr>
                 <th>Order ID</th>
+                <th>Food ID</th>
                 <th>Quantity</th>
-                <th>Total Price</th>
+                <th>Price</th>
                 <th>Delivery Address</th>
                 <th>Payment Type</th>
                 <th>Order Date</th>
+                <th>Order Received</th>
                 <th>Order Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+                <th>View / Cancel</th>
+                </tr>
             <?php
-                $osql = "SELECT * FROM custorders WHERE custID = $loggedID";
-                $oquery = mysqli_query($conn, $osql);
-                while ($ofetch = mysqli_fetch_array($oquery)) { 
-                    $ids = $ofetch['orderID'];                 
+            if (mysqli_num_rows($result) > 0) {
+                while($data = mysqli_fetch_assoc($result)) {
             ?>
             <tr>
-                <td><?php echo $ids; ?></td>
-                <td><?php echo $ofetch['orderQuantity']; ?></td>
-                <td>$<?php echo $ofetch['orderPrice']; ?></td>
-                <td><?php echo $ofetch['orderAddress']; ?></td>
-                <td><?php echo $ofetch['paymentType']; ?></td>
-                <td><?php echo $ofetch['orderDate']; ?></td>
-                <td><?php echo $ofetch['orderStatus']; ?></td>
-                <td><?php if ($ofetch['orderStatus'] == "InProgress") { ?><button class="open-btn" onclick="openForm()">Cancel</button> <?php }?></td>
-                <div class="cancel-popup" id="cancelForm">
-                    <form action="cancel.php" class="cancel-container">
-                        <div id="cancelForm-content">
-                            <input type="text" name="reason" placeholder="Reason for cancellation" required><br><br>
-                            <button type="submit" class="cancel-btn"><?php echo "<a href='includes/cancelOrder.inc.php?order_id=".$ofetch['orderID']."&deliveryTime=".$ofetch['orderDate']."'>Continue</a></div>";?></button>
-                            <span class="close-btn" onclick="closeForm()">×</span>
-                        </div>
-                    </form>
-                </div>
-            </tr>
-            <?php }?>
-        </tbody>
-    </table>
-    <script>
-        function openForm() {
-        document.getElementById("cancelForm").style.display = "block";
-        }
+                <td><?php echo $data['orderID']; ?> </td>
+                <td><?php echo $data['foodID']; ?> </td>
+                <td><?php echo $data['orderQuantity']; ?> </td>
+                <td><?php echo $data['orderPrice']; ?> </td>
+                <td><?php echo $data['orderAddress']; ?> </td>
+                <td><?php echo $data['paymentType']; ?> </td>
+                <td><?php echo $data['orderDate']; ?> </td>
+                <td><?php echo $data['orderReceived']; ?> </td>
+                <td><?php echo $data['orderStatus']; ?> </td>
+                <td><a href="viewOrder.php?food=<?php echo $data['foodID']; ?>">View Order</a><?php if($data['orderStatus'] != 'Order Cancelled'){?> / <button type="submit"><?php echo "<a href='includes/cancelOrder.inc.php?id=".$data['orderID']."&time=".$data['orderDate']."'>Cancel</a></div>";?></button><?php } ?></td> 
+            <tr>
+            <?php
+                }} else { ?>
+                <tr>
+                <td colspan="8">No Orders</td>
+                </tr>
 
-        function closeForm() {
-        document.getElementById("cancelForm").style.display = "none";
-        }
-    </script>
-</div>
-</div>
+            <?php } ?>
+                </table>
+        </div>
+    </div>
 </body>

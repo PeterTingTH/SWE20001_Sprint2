@@ -111,11 +111,8 @@ function createTableFood($conn){
     $sql = "CREATE TABLE IF NOT EXISTS fooddata (
         foodID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
         foodName VARCHAR(25) NOT NULL,
-        foodCategory VARCHAR(25) NOT NULL,
-        foodCuisine VARCHAR(25) NOT NULL,
-        foodImg VARCHAR(255) NOT NULL,
-        foodPrice DECIMAL(10,2) NOT NULL,
-        foodCreated TIMESTAMP
+        foodImg VARCHAR(25) NOT NULL,
+        foodPrice DECIMAL(10,2) NOT NULL
     )";
     
     mysqli_query($conn, $sql);
@@ -137,28 +134,7 @@ function createTableCart($conn){
 }
 
 function createTableOrders($conn){
-    $sql = "CREATE TABLE IF NOT EXISTS custorders (
-        orderID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-        foodID INT(11) UNSIGNED NOT NULL,
-        custID INT(11) UNSIGNED NOT NULL,
-        orderQuantity INT(10) UNSIGNED NOT NULL,
-        orderPrice DECIMAL(10,2) NOT NULL,
-        orderAddress VARCHAR(50) NOT NULL,
-        paymentType VARCHAR(20) NOT NULL,
-        orderMsg VARCHAR(200),
-        orderDate DATETIME NOT NULL,
-        orderReceived DATETIME,
-        orderStatus VARCHAR(20) NOT NULL DEFAULT \"InProgress\",
-        PRIMARY KEY (orderID,foodID),
-        FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
-        FOREIGN KEY (custID) REFERENCES custdata(custID)
-    )";
-    
-    mysqli_query($conn, $sql);
-}
-
-function createTableCustCancelOrders($conn){
-    $sql = "CREATE TABLE IF NOT EXISTS custcancelorders (
+    $sql = "CREATE TABLE IF NOT EXISTS pendingorders (
         orderID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
         foodID INT(11) UNSIGNED NOT NULL,
         custID INT(11) UNSIGNED NOT NULL,
@@ -170,7 +146,28 @@ function createTableCustCancelOrders($conn){
         orderDate DATETIME NOT NULL,
         orderReceived DATETIME,
         orderStatus VARCHAR(20) NOT NULL DEFAULT \"Pending\",
-        PRIMARY KEY (orderID,foodID)
+        PRIMARY KEY (orderID,foodID),
+        FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
+        FOREIGN KEY (custID) REFERENCES custdata(custID)
+    )";
+    
+    mysqli_query($conn, $sql);
+}
+
+function createTableCustCancelOrders($conn){
+    $sql = "CREATE TABLE IF NOT EXISTS custcancelledorders (
+        orderID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+        foodID INT(11) UNSIGNED NOT NULL,
+        custID INT(11) UNSIGNED NOT NULL,
+        orderQuantity INT(10) UNSIGNED NOT NULL,
+        orderPrice DECIMAL(10,2) NOT NULL,
+        orderAddress VARCHAR(50) NOT NULL,
+        paymentType VARCHAR(20) NOT NULL,
+        orderMsg VARCHAR(200),
+        orderDate DATETIME NOT NULL,
+        PRIMARY KEY (orderID,foodID),
+        FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
+        FOREIGN KEY (custID) REFERENCES custdata(custID)
     )";
     
     mysqli_query($conn, $sql);

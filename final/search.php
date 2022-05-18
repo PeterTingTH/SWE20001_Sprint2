@@ -14,12 +14,14 @@
 <?php include 'navigation.php';?>
 <h1 style="padding: 5%; text-align: center;">Food Menu</h1>
 <div class="search-content" style="padding: 20px; text-align: center;">
-    <table style="width: 100%;">
+    <table class="orders-table">
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th>Item Name</th>
                 <th>Price</th>
+                <th></th>
             </tr>
         </thead>
 <?php
@@ -33,14 +35,19 @@
         if ($queryResult > 0){
             while($display = mysqli_fetch_array($result)){
                 $foodID = $display['foodID'];
+                $foodImg = $display['foodImg'];
+                $foodName = $display['foodName'];
+                $foodPrice = $display['foodPrice'];
                 //echo "<h2>".$display['foodName']."</h2><p>".$display['foodPrice']."</p>";
 ?>
         <tbody>
+        <?php echo "
             <tr>
-                <td><?php echo $display['foodImg']; ?></td>
-                <td><?php echo $display['foodName']; ?></td>
-                <td><?php echo $display['foodPrice']; ?></td>
-<?php 
+                <td>$foodID</td>
+                <td><img src='$foodImg' class='testFoodMenu'></td>
+                <td>$foodName</td>
+                <td>$$foodPrice</td>
+            "; 
             if(isset($_SESSION['custid'])){
                 echo "
                 <td>
