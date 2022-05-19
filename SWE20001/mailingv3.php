@@ -1,10 +1,5 @@
 <?php
 include('header.php');
-    // Subscribe my channel if you are using this code
-    // Subscribe my channel if you are using this code
-    // Subscribe my channel if you are using this code
-    // Subscribe my channel if you are using this code
-    // Subscribe my channel if you are using this code
 
 
     use PHPMailer\PHPMailer\PHPMailer;
@@ -27,7 +22,7 @@ include('header.php');
 
         //SMTP Settings
         $mail->isSMTP();
-        //$mail->SMTPDebug = 3;  ///Keep It commented this is used for debugging                          
+        //$mail->SMTPDebug = 3;  /// this is used for debugging                          
         $mail->Host = "smtp.gmail.com"; // smtp address of your email
         $mail->SMTPAuth = true;
         $mail->Username = $from;
