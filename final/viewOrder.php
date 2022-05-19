@@ -44,7 +44,7 @@
                 <td>$foodID</td>
                 <td><img src='$foodImg' class='testFoodMenu'></td>
                 <td>$foodName</td>
-                <td>$$foodPrice</td>
+                <td>RM$foodPrice</td>
             </tr>";
         } 
 ?>

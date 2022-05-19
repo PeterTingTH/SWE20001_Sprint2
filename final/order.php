@@ -78,7 +78,7 @@
                 <td><?php echo $data['orderID']; ?> </td>
                 <td><?php echo $data['foodID']; ?> </td>
                 <td><?php echo $data['orderQuantity']; ?> </td>
-                <td><?php echo $data['orderPrice']; ?> </td>
+                <td>RM<?php echo $data['orderPrice']; ?> </td>
                 <td><?php echo $data['orderAddress']; ?> </td>
                 <td><?php echo $data['paymentType']; ?> </td>
                 <td><?php echo $data['orderDate']; ?> </td>
