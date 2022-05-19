@@ -28,7 +28,7 @@ if (isset($_POST["checkoutCart"])){
         $subtotal = $result["subtotal"];
 
         if($items == 0){
-            $sql = "INSERT INTO pendingorders (foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO custorders (foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)){
                 mysqli_close($conn);
@@ -43,7 +43,7 @@ if (isset($_POST["checkoutCart"])){
             $items += 1;
             $last_id = mysqli_insert_id($conn);
         } else {
-            $sql = "INSERT INTO pendingorders (orderID, foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO custorders (orderID, foodID, custID, orderQuantity, orderPrice, orderAddress, paymentType, orderMsg, orderDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)){
                 mysqli_close($conn);

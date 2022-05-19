@@ -291,7 +291,7 @@ function createTableCart($conn){
 }
 
 function createTableOrders($conn){
-    $sql = "CREATE TABLE IF NOT EXISTS pendingorders (
+    $sql = "CREATE TABLE IF NOT EXISTS custorders (
         orderID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
         foodID INT(11) UNSIGNED NOT NULL,
         custID INT(11) UNSIGNED NOT NULL,

@@ -25,7 +25,7 @@
             <?php 
                 $loggedID = $_SESSION["custid"];
                 $db = $conn;
-                $table = "pendingorders";
+                $table = "custorders";
                 $columns = [`orderID`, `foodID`, `custID`, `orderQuantity`, `orderPrice`, `orderAddress`, `paymentType`, `orderMsg`, `orderDate`, `orderReceived`, `orderStatus`];
                 $fetchData = fetch_data($db, $table, $columns);
 
@@ -54,7 +54,7 @@
                 }
                     return $msg;
                 }
-                $q = "SELECT * FROM pendingorders";
+                $q = "SELECT * FROM custorders";
                 $result = mysqli_query($db, $q);
             ?>
             <table class = "orders-table">
