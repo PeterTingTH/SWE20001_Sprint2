@@ -117,6 +117,7 @@ function createTableFood($conn){
         foodID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
         foodName VARCHAR(25) NOT NULL,
         foodImg VARCHAR(200) NOT NULL,
+        foodCategory VARCHAR(25) NOT NULL,
         foodPrice DECIMAL(10,2) NOT NULL
     )";
     
@@ -133,10 +134,11 @@ function createTableFood($conn){
         $foodName = "Apple Juice";
         $foodImg = "uploads/foodImg/apple.png";
         $foodPrice = 10;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "cold";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -152,10 +154,11 @@ function createTableFood($conn){
         $foodName = "Grape Juice";
         $foodImg = "uploads/foodImg/grapes.png";
         $foodPrice = 10;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "cold";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -171,10 +174,11 @@ function createTableFood($conn){
         $foodName = "Lamb Steak";
         $foodImg = "uploads/foodImg/lambSteak.jpg";
         $foodPrice = 20;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "warm";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -190,10 +194,11 @@ function createTableFood($conn){
         $foodName = "Loaded Fries";
         $foodImg = "uploads/foodImg/loadedFries.jpg";
         $foodPrice = 15;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "warm";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -209,10 +214,11 @@ function createTableFood($conn){
         $foodName = "Pasta";
         $foodImg = "uploads/foodImg/pasta.jpg";
         $foodPrice = 20;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "warm";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -228,10 +234,11 @@ function createTableFood($conn){
         $foodName = "Pepperoni";
         $foodImg = "uploads/foodImg/pepperoni.jpg";
         $foodPrice = 20;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "warm";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -247,10 +254,11 @@ function createTableFood($conn){
         $foodName = "Salad";
         $foodImg = "uploads/foodImg/salad.jpg";
         $foodPrice = 20;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "warm";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
@@ -266,10 +274,11 @@ function createTableFood($conn){
         $foodName = "Spicy Wings";
         $foodImg = "uploads/foodImg/spicyWings.jpg";
         $foodPrice = 20;
-        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $foodCategory = "warm";
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodCategory, foodPrice) VALUES (?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_bind_param($stmt, "ssss", $foodName, $foodImg, $foodCategory, $foodPrice);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     }
