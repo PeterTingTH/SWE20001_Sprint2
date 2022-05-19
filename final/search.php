@@ -17,11 +17,10 @@
     <table class="orders-table">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
-                <th>Item Name</th>
+                <th>Image</th>
+                <th>Name</th>
                 <th>Price</th>
-                <th></th>
+                <?php if(isset($_SESSION["custid"])){echo "<th>Button</th>";}?>
             </tr>
         </thead>
 <?php
@@ -38,12 +37,10 @@
                 $foodImg = $display['foodImg'];
                 $foodName = $display['foodName'];
                 $foodPrice = $display['foodPrice'];
-                //echo "<h2>".$display['foodName']."</h2><p>".$display['foodPrice']."</p>";
 ?>
         <tbody>
         <?php echo "
             <tr>
-                <td>$foodID</td>
                 <td><img src='$foodImg' class='testFoodMenu'></td>
                 <td>$foodName</td>
                 <td>$$foodPrice</td>

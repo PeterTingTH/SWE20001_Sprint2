@@ -61,7 +61,8 @@
     #sign_up_page .position_signup,
     #login_page .position_login,
     #profile_page .position_profile,
-    #shopping_cart_page .position_cart {
+    #shopping_cart_page .position_cart,
+    #order_page .position_order {
         background-color: #111;
     }
     /*Sign Up, Login, Verification Key, Forget Password*/

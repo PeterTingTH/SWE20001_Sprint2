@@ -38,7 +38,7 @@ if(isset($_SESSION['custid'])){
 } else if(isset($_SESSION['adminid'])){
     echo "<nav>";
     echo '<div class="logo">';
-    echo '<h4><a>PINOCONE</a></h4>';
+    echo '<h4><a href="admin.php">PINOCONE</a></h4>';
     echo '</div>';
     echo '<ul class="nav-links">';
     echo '<li><a href="includes/logout.inc.php">Log Out</a></li>';

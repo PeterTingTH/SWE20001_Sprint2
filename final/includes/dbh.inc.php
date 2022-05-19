@@ -116,11 +116,163 @@ function createTableFood($conn){
     $sql = "CREATE TABLE IF NOT EXISTS fooddata (
         foodID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
         foodName VARCHAR(25) NOT NULL,
-        foodImg VARCHAR(25) NOT NULL,
+        foodImg VARCHAR(200) NOT NULL,
         foodPrice DECIMAL(10,2) NOT NULL
     )";
     
     mysqli_query($conn, $sql);
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 1;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Apple Juice";
+        $foodImg = "uploads/foodImg/apple.png";
+        $foodPrice = 10;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 2;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Grape Juice";
+        $foodImg = "uploads/foodImg/grapes.png";
+        $foodPrice = 10;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 3;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Lamb Steak";
+        $foodImg = "uploads/foodImg/lambSteak.jpg";
+        $foodPrice = 20;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 4;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Loaded Fries";
+        $foodImg = "uploads/foodImg/loadedFries.jpg";
+        $foodPrice = 15;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 5;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Pasta";
+        $foodImg = "uploads/foodImg/pasta.jpg";
+        $foodPrice = 20;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 6;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Pepperoni";
+        $foodImg = "uploads/foodImg/pepperoni.jpg";
+        $foodPrice = 20;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 7;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Salad";
+        $foodImg = "uploads/foodImg/salad.jpg";
+        $foodPrice = 20;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    $sql = "SELECT * FROM fooddata WHERE foodID = 8;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if(!$row = mysqli_fetch_assoc($resultData)){
+        $foodName = "Spicy Wings";
+        $foodImg = "uploads/foodImg/spicyWings.jpg";
+        $foodPrice = 20;
+        $sql = "INSERT INTO fooddata (foodName, foodImg, foodPrice) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $foodName, $foodImg, $foodPrice);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
 }
 
 function createTableCart($conn){
@@ -153,26 +305,7 @@ function createTableOrders($conn){
         orderStatus VARCHAR(20) NOT NULL DEFAULT \"Pending\",
         PRIMARY KEY (orderID,foodID),
         FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
-        FOREIGN KEY (custID) REFERENCES custdata(custID)
-    )";
-    
-    mysqli_query($conn, $sql);
-}
-
-function createTableCustCancelOrders($conn){
-    $sql = "CREATE TABLE IF NOT EXISTS custcancelledorders (
-        orderID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-        foodID INT(11) UNSIGNED NOT NULL,
-        custID INT(11) UNSIGNED NOT NULL,
-        orderQuantity INT(10) UNSIGNED NOT NULL,
-        orderPrice DECIMAL(10,2) NOT NULL,
-        orderAddress VARCHAR(50) NOT NULL,
-        paymentType VARCHAR(20) NOT NULL,
-        orderMsg VARCHAR(200),
-        orderDate DATETIME NOT NULL,
-        PRIMARY KEY (orderID,foodID),
-        FOREIGN KEY (foodID) REFERENCES fooddata(foodID),
-        FOREIGN KEY (custID) REFERENCES custdata(custID)
+        FOREIGN KEY (custID) REFERENCES custdata(custID) ON DELETE CASCADE
     )";
     
     mysqli_query($conn, $sql);
@@ -200,4 +333,3 @@ createTableMembershipPayment($conn);
 createTableFood($conn);
 createTableCart($conn);
 createTableOrders($conn);
-createTableCustCancelOrders($conn);
